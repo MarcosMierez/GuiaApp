@@ -1,0 +1,32 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.Models.Evento>
+
+<h2>Eventos que Submeti Palestras</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tema)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local)
+            </td>
+            <td>
+                <a href="@Url.Action("PalestrasSubmetidas","PalestrantePainel",new{id=@item.ID})">Palestras Submetidas</a>
+            </td>
+        </tr>
+    }
+
+</table>

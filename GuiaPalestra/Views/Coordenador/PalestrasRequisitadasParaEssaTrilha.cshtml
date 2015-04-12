@@ -1,0 +1,16 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.ViewModel.PalestraSolicitadaViewModel>
+<h2>Palestras Requisitadas Para Essa Trilha</h2>
+<table class="table">
+    <tr>
+        <th>Titulo</th>
+        <th>Nome</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Titulo</th>
+            <th>@item.Nome</th>
+        </tr>
+    }
+</table>

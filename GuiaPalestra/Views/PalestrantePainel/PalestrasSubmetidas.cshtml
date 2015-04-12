@@ -1,0 +1,26 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.ViewModel.PalestraSolicitadaViewModel>
+
+<h2>Palestras Submetidas</h2>
+
+<table class="table">
+    <tr>
+        <th>Titulo</th>
+        <th>Pendencia</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Titulo</th>
+            <th>@item.Pendencia</th>
+            <th><a class="glyphicon glyphicon-remove"></a></th>
+            @if (@item.Pendencia == "aceita")
+            {
+                <th><a href="@Url.Action("ConfirmarPalestra", "PalestrantePainel", new {eventoId = @item.EventoId, palestraId = @item.PalestraId, coordenadorId = @item.CoordenadorId,resposta = "confirmada",trilhaId=@item.TrilhaId})">Confirmar Palestra</a></th>
+            }
+        </tr>
+    }
+</table>
+

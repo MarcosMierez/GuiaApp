@@ -1,0 +1,23 @@
+﻿@model IEnumerable<GuiaPalestra.Models.Palestra>
+@{
+    ViewBag.Title = "MinhasPalestras";
+}
+<table class="table">
+    <tr>
+        <th>Titulo</th>
+        <th>Duracao</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Titulo</th>
+            <th>@item.Duracao.ToString("HH:mm")</th>
+            <th>
+                <a href="@Url.Action("DisponibilizarPalestra", "PalestrantePainel", new {id = @item.ID})">@item.Status</a>
+                <a href="@Url.Action("RemoverPalestra", "PalestrantePainel", new {id = @item.ID})" class="glyphicon glyphicon-remove"></a>
+                
+            </th>
+        </tr>
+    }
+</table>

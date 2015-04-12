@@ -1,0 +1,22 @@
+﻿
+@model IEnumerable<GuiaPalestrasOnline.Models.Trilha>
+<fieldset>
+
+    <table class="table">
+        <tr>
+            <th>Trilhas</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th><a href="@Url.Action("PalestrasParaEssaTrilha", "Coordenador", new {id = @item.ID})">@item.NomeTrilha</a></th>
+            </tr>
+
+        }
+    </table>
+    <a href="@Url.Action("CriarTrilha", "Coordenador")">Nova Trilha</a>
+    <a href="@Url.Action("CriarSala","Coordenador")">Nova Sala</a>
+
+</fieldset>
+

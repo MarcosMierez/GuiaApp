@@ -1,0 +1,37 @@
+﻿@model IEnumerable<GuiaPalestra.Models.Palestra>
+<fieldset>
+    <table class="table">
+        <tr>
+            <th>Palestra</th>
+            <th>Palestrante</th>
+            <th>Trilha</th>
+            <th>Sala</th>
+            <th>Duracao</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Titulo</th>
+                <th><a href="@Url.Action("Detalhe", "Palestrante", new {id = @item.PalestranteId})">@item.Palestrante.Nome</a></th>
+                <th><a href="@Url.Action("Detalhe", "Trilha", new {id = @item.TrilhaId})">@item.Trilha.NomeTrilha</a></th>
+                <th><a href="@Url.Action("Detalhe", "Sala", new {id = @item.SalaId})">@item.Sala.NumeroSala</a></th>
+                <th>@item.Duracao</th>
+                <th>
+                    <a href="@Url.Action("Detalhe", "Palestra", new {id = @item.ID})" class="glyphicon glyphicon-book"></a>
+                    @{
+                        if (User.IsInRole("Usuario"))
+                        {
+                            <a href="@Url.Action("Inscrever", "Palestra", new {id = @item.ID})">Inscrever</a>
+                        }
+                        if (User.IsInRole("Administrador"))
+                         {
+                             <a href="@Url.Action("Editar", "Palestra", new {id = @item.ID})" class="glyphicon glyphicon-pencil"></a>
+                         }
+                    }
+                </th>
+            </tr>
+        }
+
+    </table>
+</fieldset>

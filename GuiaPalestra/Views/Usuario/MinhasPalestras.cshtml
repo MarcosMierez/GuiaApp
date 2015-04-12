@@ -1,0 +1,40 @@
+﻿@using System.Diagnostics.Eventing.Reader
+@model IEnumerable<GuiaPalestra.Models.Palestra>
+<fieldset>
+    <table class="table">
+        @{
+            if (Model.Any())
+             {
+                 <tr>
+                     <th>Palestra</th>
+                     <th>Palestrante</th>
+                     <th>Trilha</th>
+                     <th>Sala</th>
+                     <th>Duracao</th>
+                 </tr>
+
+
+
+                 foreach (var item in Model)
+                 {
+                     <tr>
+                         <th>@item.Titulo</th>
+                         <th><a href="@Url.Action("Detalhe", "Palestrante", new {id = @item.Palestrante.ID})">@item.Palestrante.Nome</a></th>
+                         <th><a href="@Url.Action("Detalhe", "Trilha", new {id = @item.Trilha.ID})">@item.Trilha.NomeTrilha</a></th>
+                         <th><a href="@Url.Action("Detalhe", "Sala", new {id = @item.Sala.ID})">@item.Sala.NumeroSala</a></th>
+                         <th>@item.Duracao</th>
+                         <th>
+                             <a href="@Url.Action("Detalhe", "Palestra", new {id = @item.ID})" class="glyphicon glyphicon-book"></a>
+                             <a href="@Url.Action("Inscrever", "Usuario", new { id = @item.ID, confirmacao = true })">Confirmar</a>
+                             <a href="@Url.Action("Inscrever", "Usuario", new { id = @item.ID, confirmacao = false })">Desistir</a>
+                         </th>
+                     </tr>
+                 }
+             }
+            else
+            {
+               <p>Voce nao possui palestras</p>
+            }
+        }
+    </table>
+</fieldset>

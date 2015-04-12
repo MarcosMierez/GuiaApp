@@ -1,0 +1,26 @@
+﻿@model GuiaPalestrasOnline.Models.Trilha
+
+@{
+    ViewBag.Title = "Detalhe";
+}
+
+<h2>Detalhe</h2>
+
+<div>
+    <h4>Trilha</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeTrilha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeTrilha)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.ID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

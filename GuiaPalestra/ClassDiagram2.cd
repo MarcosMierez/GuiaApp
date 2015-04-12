@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GuiaPalestrasOnline.Models.Usuario">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAACAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestrasOnline.Models.Entidade">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Entidade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestrasOnline.Models.Evento">
+    <Position X="11.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAQAAAAABAQAAAAAABAAAACAA=</HashCode>
+      <FileName>Models\Evento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestrasOnline.Models.Palestrante">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Palestrante.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestrasOnline.Models.Trilha">
+    <Position X="7.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Trilha.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestra.Models.Coordenador">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Coordenador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestra.Models.Palestra">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAAAAAAAAAAAJAAAAQAAIAAACAAAAABE=</HashCode>
+      <FileName>Models\Palestra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuiaPalestra.Models.Sala">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAABAAAAAABAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Sala.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

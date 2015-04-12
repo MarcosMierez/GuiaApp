@@ -1,0 +1,14 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.Models.Evento>
+<h2>Eventos Disponiveis</h2>
+
+<strong>Eventos</strong>
+@foreach (var eventos  in Model)
+{
+    <p><a href="@Url.Action("TrilhasdeEvento","Evento",new{eventoId=@eventos.ID,coordenadorId=@eventos.CoordenadorId})">@eventos.Tema</a></p>
+    <p>@eventos.DiaInicial</p>
+    <p>@eventos.DiaFinal</p>
+    <p>@eventos.Local</p>
+}
+
+
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.Models.Trilha>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Cadastrar","Trilha")">Nova Trilha</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeTrilha)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeTrilha)
+        </td>
+        <td>
+            <a href="@Url.Action("Detalhe", "Trilha", new {id = @item.ID})" class="glyphicon glyphicon-book"></a>
+            <a href="@Url.Action("Editar", "Trilha", new {id = @item.ID})" class="glyphicon glyphicon-pencil"></a>
+            <a href="@Url.Action("Delete","Trilha",new{id=@item.ID})" class="glyphicon glyphicon-remove"></a>
+        </td>
+    </tr>
+}
+
+</table>

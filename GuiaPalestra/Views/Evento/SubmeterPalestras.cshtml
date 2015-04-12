@@ -1,0 +1,21 @@
+﻿@model IEnumerable<GuiaPalestra.Models.Palestra>
+@{
+    ViewBag.Title = "Submeter Palestras";
+}
+<table class="table">
+    <tr>
+        <th>Titulo</th>
+        <th>Duracao</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Titulo</th>
+            <th>@item.Duracao.ToString("HH:mm")</th>
+            <th>
+                <a href="@Url.Action("DisponibilizarPalestra", "Evento", new {id = @item.ID})">DisponibilizarPalestra</a>
+            </th>
+        </tr>
+    }
+</table>
