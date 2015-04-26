@@ -6,7 +6,6 @@ namespace GuiaPalestra.Models
     {
         public string NumeroSala { get; set; }
         public string Descricao { get; set; }
-        public int Vagas { get; set; }
         public string EventoId { get; set; }
     }
 }

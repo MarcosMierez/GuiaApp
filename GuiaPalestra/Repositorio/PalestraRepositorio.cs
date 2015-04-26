@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices.Internal;
 using System.Linq;
-using System.Web;
-using System.Web.DynamicData;
 using Dapper;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Models;
-using GuiaPalestrasOnline.ViewModel;
+using GuiaPalestrasOnline.Repositorio;
 
-namespace GuiaPalestrasOnline.Repositorio
+namespace GuiaPalestra.Repositorio
 {
     public class PalestraRepositorio : ICrud<Palestra>
     {

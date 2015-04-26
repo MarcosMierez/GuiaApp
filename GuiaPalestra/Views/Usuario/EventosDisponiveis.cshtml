@@ -1,0 +1,22 @@
+﻿@model IEnumerable<GuiaPalestrasOnline.Models.Evento>
+
+
+<h2>Eventos Disponiveis</h2>
+@foreach (var eventos in Model)
+{
+    <a href="@Url.Action("PalestrasEvento","Usuario",new{id=@eventos.ID})">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">@eventos.Tema</div>
+                <div class="panel-body">
+                    Local :@eventos.Local<br>
+                    Dia Inicial:@eventos.DiaInicial.ToString("dd/MM/yyyy")<br>
+                    Dia Final :@eventos.DiaFinal.ToString("dd/MM/yyyy")<br>
+                </div>
+            </div>
+        </div>
+    </a>
+}
+<div style="clear:both"></div>
+
+

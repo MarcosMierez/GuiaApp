@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GuiaPalestra.Models;
+using GuiaPalestra.ViewModel;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
-using GuiaPalestrasOnline.ViewModel;
 
 namespace GuiaPalestrasOnline.Controllers
 {

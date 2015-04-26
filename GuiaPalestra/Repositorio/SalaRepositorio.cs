@@ -18,8 +18,8 @@ namespace GuiaPalestrasOnline.Repositorio
         }
         public void Save(Sala entidade)
         {
-            contexto.SqlBd.Query("insert into sala (Id,NumeroSala,Descricao,EventoId,Vagas) values(@Id,@numero,@descricao,@eventoId,@vagas)",
-                new {Id = entidade.ID, numero = entidade.NumeroSala, descricao = entidade.Descricao,eventoId=entidade.EventoId,vagas=entidade.Vagas});
+            contexto.SqlBd.Query("insert into sala (Id,NumeroSala,Descricao,EventoId) values(@Id,@numero,@descricao,@eventoId)",
+                new {Id = entidade.ID, numero = entidade.NumeroSala, descricao = entidade.Descricao,eventoId=entidade.EventoId});
         }
 
         public void Update(Sala entidade)

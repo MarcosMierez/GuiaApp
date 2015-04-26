@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GuiaPalestrasOnline.ViewModel.PalestraSolicitadaViewModel>
+﻿@model IEnumerable<GuiaPalestra.ViewModel.PalestraSolicitadaViewModel>
 
 @{
     ViewBag.Title = "GerenciarEvento";
@@ -6,11 +6,9 @@
 
 <h2>GerenciarEvento</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<input type="hidden" value="@ViewBag.eventId" id="palestraId" />
 <table class="table">
-    <tr>
+    <tr id="123">
         <th>
             @Html.DisplayNameFor(model => model.Titulo)
         </th>
@@ -23,24 +21,61 @@
         <th>
             @Html.DisplayNameFor(model => model.NomeTrilha)
         </th>
-        <th></th>
+        <th>
+            Inicio
+        </th>
+        <th>
+            Fim
+        </th>
+        <th>
+            Ações
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeTrilha)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeTrilha)
+            </td>
+            <td>
+                @item.HoraInicial.ToString("HH:mm")
+            </td>
+            <td>
+                @item.HoraFinal.ToString("HH:mm")
+            </td>
+            <td>
+                <a href="@Url.Action("EditarPalestraEvento", "Coordenador", new {id = @item.PalestraId})" class="btn btn-success">Organizar</a>
+            </td>
+
+
+        </tr>
+
+    }
 
 </table>
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<a class="btn btn-warning" id="publicarEvento">Publicar Evento</a>
+<script>
+    $("#publicarEvento").click(function() {
+        var resposta = document.getElementById("palestraId").value;
+        PublicEvent(resposta);
+    });
+
+    function PublicEvent(resposta) {
+        $.ajax({
+            url: '@Url.Action("PublicarEvento", "Coordenador")',
+            type: 'post',
+            data: { variavel: resposta }
+        });
+    };
+</script>

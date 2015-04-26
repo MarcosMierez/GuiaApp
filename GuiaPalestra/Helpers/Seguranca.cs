@@ -44,7 +44,9 @@ namespace GuiaPalestrasOnline.Helpers
                 ID = user.FindFirst("ID").Value,
                 Email = user.FindFirst(ClaimTypes.Email).Value,
                 Nome = user.FindFirst(ClaimTypes.Name).Value,
+               Permissao = new List<string>()
             };
+            usuario.Permissao.Add(user.FindFirst(ClaimTypes.Role).Value);
             return usuario;
         }
     }

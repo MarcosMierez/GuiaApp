@@ -167,6 +167,7 @@
     <Content Include="Areas\Cadastro\Views\UsuarioM\TodosUsuarios.cshtml" />
     <Content Include="Areas\Cadastro\Views\UsuarioM\Update.cshtml" />
     <Content Include="Areas\Cadastro\Views\_ViewStart.cshtml" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -260,8 +261,6 @@
     <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Views\Evento\SubmeterPalestras.cshtml" />
     <Content Include="Views\Evento\TrilhasDeEvento.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\PalestrasParaEsteEvento.cshtml" />
     <Content Include="Views\PalestrantePainel\CriarPalestras.cshtml" />
     <Content Include="Views\PalestrantePainel\EditarPalestra.cshtml" />
     <Content Include="Views\PalestrantePainel\Index.cshtml" />
@@ -281,6 +280,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Views\Coordenador\CriarSala.cshtml" />
     <Content Include="Views\Coordenador\GerenciarEvento.cshtml" />
+    <Content Include="Views\Coordenador\EditarPalestraEvento.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Usuario\EventosDisponiveis.cshtml" />
+    <Content Include="Views\Usuario\PalestrasEvento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace GuiaPalestrasOnline.ViewModel
+namespace GuiaPalestra.ViewModel
 {
     public class PalestraSolicitadaViewModel
     {
@@ -18,5 +15,11 @@ namespace GuiaPalestrasOnline.ViewModel
         public string Pendencia { get; set; }
         public string TrilhaId  { get; set; }
         public string  NomeTrilha { get; set; }
+        public string SalaId { get; set; }
+        public string NumeroSala { get; set; }
+        public DateTime HoraInicial { get; set; }
+        public DateTime HoraFinal { get; set; }
+        public int Vagas { get; set; }
+
     }
 }

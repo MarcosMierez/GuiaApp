@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Controllers
+namespace GuiaPalestra.Controllers
 {
     [Authorize(Roles = "Palestrante")]
     public class PalestrantePainelController : Controller
     {
         private readonly Usuario _usuario;
+        public static string _eventoId;
 
         public PalestrantePainelController()
         {
@@ -60,7 +56,7 @@ namespace GuiaPalestrasOnline.Controllers
             Construtor.PalestraApp().RemoverPalestraDoPalestrante(id, _usuario.ID);
             return RedirectToAction("MinhasPalestras");
         }
-      
+
         public ActionResult PalestrasRequisitadas()
         {
             return View(Construtor.EventoApp().EventosSolicidados(_usuario.ID));
@@ -68,13 +64,14 @@ namespace GuiaPalestrasOnline.Controllers
 
         public ActionResult PalestrasSubmetidas(string id)
         {
+            _eventoId = id;
             return View(Construtor.PalestraApp().PalestrasSubmetidas(_usuario.ID, id));
         }
 
-        public ActionResult ConfirmarPalestra(string eventoId, string palestraId, string coordenadorId,string resposta,string trilhaId)
+        public ActionResult ConfirmarPalestra(string eventoId, string palestraId, string coordenadorId, string resposta, string trilhaId)
         {
-            Construtor.EventoApp().ResponderRequisicao(palestraId,eventoId,resposta,coordenadorId,trilhaId);
-            return RedirectToAction("Index");
+            Construtor.EventoApp().ConfirmarParticipacao(palestraId, eventoId, resposta, coordenadorId, trilhaId, _usuario.ID);
+            return RedirectToAction("PalestrasSubmetidas/" + _eventoId);
         }
 
     }

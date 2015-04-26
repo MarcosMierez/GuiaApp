@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using GuiaPalestrasOnline.Aplicacao;
-using GuiaPalestrasOnline.Areas.Cadastro.Controllers;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using Microsoft.AspNet.Identity;
 
-namespace GuiaPalestrasOnline.Controllers
+namespace GuiaPalestra.Controllers
 {
     [Authorize(Roles = "Usuario")]
     public class UsuarioController : Controller
@@ -24,36 +20,27 @@ namespace GuiaPalestrasOnline.Controllers
         {
             return View();
         }
+
+        public ActionResult EventosDisponiveis()
+        {
+            
+            return View(Construtor.EventoApp().EventosDisponiveis(_usuario.Permissao[0]));
+        }
+
+        public ActionResult PalestrasEvento(string id)
+        {
+            return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id));
+        }
         public ActionResult MinhasPalestras()
         {
-            return View(PalestraRepositorio.GetAll(_usuario.ID));
+            return View();
         }
-        public ActionResult Inscrever(string id,bool confirmacao)
+
+        public ActionResult Inscrever(string id, string eventoId)
         {
-            ChecaHorario(id);
-            return RedirectToAction("MinhasPalestras");
+            Construtor.EventoApp().InscreverPalestraEvento(id, eventoId);
+            return RedirectToAction("PalestraEvento");
         }
-
-        public bool ChecaHorario(string palestraId)
-        {
-            var palestraTime = PalestraRepositorio.GetAll(_usuario.ID).FirstOrDefault(x => x.ID == palestraId);
-            if (palestraTime != null)
-            {
-
-
-                foreach (var palestras in PalestraRepositorio.GetAll(_usuario.ID))
-                {
-                    if (palestras.ID != palestraTime.ID)
-                    {
-                        if (palestraTime.Duracao.Date == palestras.Duracao.Date)
-                        {
-                            return true;
-                        }
-
-                    }
-                }
-            }
-            return false;
-        }
+  
     }
 }

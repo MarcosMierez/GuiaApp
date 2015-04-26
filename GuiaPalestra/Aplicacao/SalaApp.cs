@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Web;
+using Dapper;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Models;
+using GuiaPalestrasOnline.Repositorio;
 
 namespace GuiaPalestrasOnline.Aplicacao
 {
@@ -41,5 +43,10 @@ namespace GuiaPalestrasOnline.Aplicacao
         {
             repositorio.Delete(Id);
         }
+
+        public IEnumerable<Sala> MinhasSalas(string eventoId)
+        {
+            return new Contexto().SqlBd.Query<Sala>("select Id,NumeroSala from sala where EventoId = @eId",new{eId=eventoId}).ToList();
+        } 
     }
 }

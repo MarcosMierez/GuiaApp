@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Services.Description;
 using Dapper;
 using GuiaPalestra.Models;
+using GuiaPalestra.ViewModel;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using GuiaPalestrasOnline.ViewModel;
 
 namespace GuiaPalestrasOnline.Aplicacao
 {

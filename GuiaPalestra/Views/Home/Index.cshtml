@@ -1,9 +1,6 @@
-﻿@model IEnumerable<GuiaPalestrasOnline.Models.Evento>
+﻿<h2>Bem Vindo ao Guia de Palestras Online</h2>
+<a href="~/Acesso/Index" class="btn btn-success">Logar</a>
+<a href="~/Evento/" class="btn btn-info">Eventos</a>
 
-<h2>Todos Eventos</h2>
-@foreach (var evento in Model)
-{
-    <strong>Nome-Do-Evento</strong>
-    <h3>@evento.Local</h3>
-    <a href="@Url.Action("PalestrasParaEsteEvento","Home",new{id=@evento.ID})">Palestras Desse Evento</a>
-}
+
+

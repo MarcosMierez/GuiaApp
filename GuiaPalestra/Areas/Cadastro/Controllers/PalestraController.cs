@@ -9,7 +9,6 @@ using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using GuiaPalestrasOnline.ViewModel;
 
 namespace GuiaPalestrasOnline.Areas.Cadastro.Controllers
 {

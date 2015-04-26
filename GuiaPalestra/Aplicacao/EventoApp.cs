@@ -1,56 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Dapper;
+using GuiaPalestra.ViewModel;
+using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using GuiaPalestrasOnline.ViewModel;
 
-namespace GuiaPalestrasOnline.Aplicacao
+namespace GuiaPalestra.Aplicacao
 {
     public class EventoApp
-    { 
+    {
         private readonly ICrud<Evento> repositorio;
         private readonly Contexto contexto;
-        public EventoApp(ICrud<Evento> repo )
+        public EventoApp(ICrud<Evento> repo)
         {
-            contexto=new Contexto();
+            contexto = new Contexto();
             repositorio = repo;
         }
         public void Save(Evento entidade)
         {
             repositorio.Save(entidade);
         }
+
+        public IEnumerable<Evento> EventosDisponiveis(string permissao)
+        {
+           return contexto.SqlBd.Query<Evento>("select Id,Local,Tema,DiaInicial,DiaFinal from evento e where Status = @role ",new{role=permissao}).ToList();
+        } 
         public List<Evento> MeusEventos(string coordenadorId)
         {
-           var listaDeEventosParaCoordeandor = contexto.SqlBd.Query<Evento>(
-                "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from Evento e where @CoordenadorId = e.CoordenadorId",
-                new
-                {
-                    CoordenadorId=coordenadorId
-                }).ToList();
+            var listaDeEventosParaCoordeandor = contexto.SqlBd.Query<Evento>(
+                 "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from Evento e where @CoordenadorId = e.CoordenadorId",
+                 new
+                 {
+                     CoordenadorId = coordenadorId
+                 }).ToList();
             return listaDeEventosParaCoordeandor;
         }
-        public IEnumerable<PalestraSolicitadaViewModel> ListarPalestraDesseEvento(string TrilhaId,string CoordenadorId)
+        public IEnumerable<PalestraSolicitadaViewModel> ListarPalestraDesseEvento(string TrilhaId, string CoordenadorId)
         {
-          return  contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id PalestraId,pp.NomePalestrante Nome,pp.Id PalestranteId,pp.EmailPalestrante Email,ps.Pendencia,ps.EventoId  EventoId " +
-                                 "from Palestra p,Palestrante pp, PalestraSolicitada ps,trilha t,Coordenador c " +
-                                 "where p.Id=ps.PalestraId and " +
-                                 "pp.Id=ps.PalestranteId and " +
-                                 "t.Id=ps.TrilhaId and " +
-                                 "c.Id=ps.CoordenadorId and "+
-                                 "ps.TrilhaId=@trilhaId and ps.CoordenadorId =@coordenadorId and ps.Pendencia != 'recusada' ",new{trilhaId=TrilhaId,coordenadorId=CoordenadorId}).ToList();
+            return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id PalestraId,pp.NomePalestrante Nome,pp.Id PalestranteId,pp.EmailPalestrante Email,ps.Pendencia,ps.EventoId  EventoId " +
+                                   "from Palestra p,Palestrante pp, PalestraSolicitada ps,trilha t,Coordenador c " +
+                                   "where p.Id=ps.PalestraId and " +
+                                   "pp.Id=ps.PalestranteId and " +
+                                   "t.Id=ps.TrilhaId and " +
+                                   "c.Id=ps.CoordenadorId and " +
+                                   "ps.TrilhaId=@trilhaId and ps.CoordenadorId =@coordenadorId and ps.Pendencia != 'recusada' ", new { trilhaId = TrilhaId, coordenadorId = CoordenadorId }).ToList();
         }
         public IEnumerable<Evento> EventosSolicidados(string palestranteId)
         {
-          return  contexto.SqlBd.Query<Evento>(
-                "select Id,Tema,Local from evento e,palestrasolicitada ps where ps.EventoId=e.Id and ps.PalestranteId= @pId group by(Tema)",
-                new {pId = palestranteId}).ToList();
+            return contexto.SqlBd.Query<Evento>(
+                  "select Id,Tema,Local,DiaInicial,DiaFinal from evento e,palestrasolicitada ps where ps.EventoId=e.Id and ps.PalestranteId= @pId group by(Tema)",
+                  new { pId = palestranteId }).ToList();
         }
-        public void ResponderRequisicao(string palestraId, string eventoId,string resposta,string coordenadorId,string trilhaId)
+        public void ResponderRequisicao(string palestraId, string eventoId, string resposta, string coordenadorId, string trilhaId, string palestranteId)
         {
-            if (resposta=="pendente" || resposta=="recusada" || resposta=="aceita" || resposta=="confirmada")
+            if (resposta == "pendente" || resposta == "recusada" || resposta == "aceita" || resposta == "confirmada")
             {
                 contexto.SqlBd.Query(
                 "update palestrasolicitada set Pendencia = @R where PalestraId=@pId and EventoId = @eId", new
@@ -60,28 +65,159 @@ namespace GuiaPalestrasOnline.Aplicacao
                     eId = eventoId
                 });
             }
-            
-            if (resposta=="confirmada")
-            {
-                contexto.SqlBd.Query(
-                    "insert into palestraevento (EventoId,PalestraId,CoordenadorId,TrilhaId) values(@eId,@pId,@cId,@tId)",
-                    new {eId = eventoId, pId = palestraId, cId = coordenadorId,tId=trilhaId});
-            }
+
+
         }
         public IEnumerable<Evento> GetAll()
         {
-           return repositorio.GetAll();
+            return repositorio.GetAll();
         }
 
-        public IEnumerable<PalestraSolicitadaViewModel> PalestrasRegistradadas(string eventoId,string coordenadorId)
+        public IEnumerable<PalestraViewModel> PalestrasDisponiveisEvento(string eventoId)
         {
-          return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email from " +
-                                                                   "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp " +
-                                                                   "where p.Id = pe.PalestraId " +
-                                                                   "and t.Id = pe.TrilhaId " +
-                                                                   "and p.PalestranteId = pp.Id " +
-                                                                   "and pe.EventoId = @eId and pe.CoordenadorId = @cId",
-                                                                   new{eId=eventoId,cId=coordenadorId}).ToList();
-        } 
+           var palestra= contexto.SqlBd.Query<PalestraViewModel>(
+                "select p.Id ,p.Titulo,pl.Id PalestranteId,pl.NomePalestrante,s.Id SalaId,pe.Vagas,s.NumeroSala,t.Id TrilhaId,t.NomeTrilha ,pe.HorarioInicial,pe.HorarioFinal,pe.EventoId   " +
+                "from evento e ,palestrante pl,palestra p,sala s,trilha t,palestraevento pe " +
+                "where e.Id=pe.EventoId and " +
+                "pl.Id=p.PalestranteId and " +
+                "p.Id = pe.PalestraId and " +
+                "t.Id= pe.TrilhaId and " +
+                "s.Id =pe.SalaId and " +
+                "pe.EventoId = @Id", new {Id = eventoId}).ToList(); 
+            return palestra;
+        }
+
+        public IEnumerable<PalestraSolicitadaViewModel> PalestrasRegistradas(string eventoId, string coordenadorId)
+        {
+            return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal from " +
+                                                                     "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp " +
+                                                                     "where p.Id = pe.PalestraId " +
+                                                                     "and t.Id = pe.TrilhaId " +
+                                                                     "and p.PalestranteId = pp.Id " +
+                                                                     "and pe.EventoId = @eId and pe.CoordenadorId = @cId",
+                                                                     new { eId = eventoId, cId = coordenadorId }).ToList();
+        }
+
+        public PalestraSolicitadaViewModel DetalhePalestra(string palestraId, string coordenadorId, string eventoId)
+        {
+            var palestra = contexto.SqlBd.Query<PalestraSolicitadaViewModel>(
+                 "select pe.SalaId SalaId,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal,p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email from " +
+                 "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp " +
+                 "where p.Id = pe.PalestraId " +
+                 "and t.Id = pe.TrilhaId " +
+                 "and p.PalestranteId = pp.Id " +
+                 "and pe.EventoId = @eId and pe.CoordenadorId = @cId and pe.PalestraId = @pId",
+                 new { pId = palestraId, cId = coordenadorId, eId = eventoId }).FirstOrDefault();
+            return palestra;
+        }
+
+        public void PreencherPalestraParaEvento(PalestraSolicitadaViewModel entidade)
+        {
+            contexto.SqlBd.Query("update palestraevento set HorarioInicial = @hi , HorarioFinal = @hf , SalaId = @sId,Vagas = @vagas " +
+                                 "where CoordenadorId = @cId and PalestraId = @pId and EventoId = @eId",
+                new
+                {
+                    hi = entidade.HoraInicial,
+                    hf = entidade.HoraFinal,
+                    sId = entidade.SalaId,
+                    cId = entidade.CoordenadorId,
+                    pId = entidade.PalestraId,
+                    eId = entidade.EventoId,
+                    vagas=entidade.Vagas
+                });
+        }
+
+        public bool ConfirmarParticipacao(string palestraId, string eventoId, string resposta, string coordenadorId, string trilhaId, string palestranteId)
+        {
+            bool validacao = false;
+            if (resposta == "confirmada")
+            {
+                var _eventosParticipados = contexto.SqlBd.Query<Evento>("select e.Tema,e.Id,DiaInicial,DiaFinal from palestraevento ps ,evento e where e.Id=ps.EventoId and ps.PalestraId = @pId group by e.Tema ", new { pId = palestraId }).ToList();
+                var _todosEventosDisponiveis = contexto.SqlBd.Query<Evento>("select Id,DiaInicial,DiaFinal,Tema from evento").ToList();
+                foreach (var evento in _todosEventosDisponiveis)
+                {
+                    foreach (var meusEventos in _eventosParticipados)
+                    {
+                        if (meusEventos.ID != evento.ID)
+                        {
+                            foreach (var meuEvento in _eventosParticipados)
+                            {
+                                if (meuEvento.ID != evento.ID)
+                                {
+                                    validacao = ChecaAnoMesDia(meuEvento.DiaInicial, meuEvento.DiaFinal,
+                                        evento.DiaInicial, evento.DiaFinal);
+                                    if (validacao == true)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (validacao == false)
+                {
+                    contexto.SqlBd.Query(
+                "update palestrasolicitada set Pendencia = @R where PalestraId=@pId and EventoId = @eId", new
+                {
+                    R = resposta,
+                    pId = palestraId,
+                    eId = eventoId
+                });
+
+
+
+
+                    contexto.SqlBd.Query(
+                    "insert into palestraevento (EventoId,PalestraId,CoordenadorId,TrilhaId) values(@eId,@pId,@cId,@tId)",
+                    new { eId = eventoId, pId = palestraId, cId = coordenadorId, tId = trilhaId });
+                }
+
+            }
+            return validacao;
+        }
+
+        private bool ChecaAnoMesDia(DateTime dataInicial, DateTime dataFinal, DateTime dataInicial2, DateTime dataFinal2)
+        {
+            for (int ano = dataInicial.Year; ano <= dataFinal.Year; ano++)
+            {
+                for (int ano2 = dataInicial2.Year; ano2 <= dataFinal2.Year; ano2++)
+                {
+                    if (ano == ano2)
+                    {
+                        for (int meses1 = dataInicial.Month; meses1 <= dataFinal.Month; meses1++)
+                        {
+                            for (int meses2 = dataInicial2.Month; meses2 <= dataFinal2.Month; meses2++)
+                            {
+                                if (meses1 == meses2)
+                                {
+
+                                    for (int dias1 = dataInicial.Day; dias1 <= dataFinal.Day; dias1++)
+                                    {
+                                        for (int dias2 = dataInicial2.Day; dias2 <= dataFinal2.Day; dias2++)
+                                        {
+                                            if (dias1 == dias2)
+                                            {
+                                                return true;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void InscreverPalestraEvento(string palestraId, string eventoId)
+        {
+            contexto.SqlBd.Query("insert into PalestraUsuario (PalestraId,EventoId) values (pid,eid)",
+                new {pid = palestraId, eid = eventoId});
+        }
     }
 }

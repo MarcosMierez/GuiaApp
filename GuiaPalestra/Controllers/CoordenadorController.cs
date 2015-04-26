@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
 using Dapper;
 using GuiaPalestra.Models;
+using GuiaPalestra.ViewModel;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using GuiaPalestrasOnline.ViewModel;
 
-namespace GuiaPalestrasOnline.Controllers
+namespace GuiaPalestra.Controllers
 {
     [Authorize(Roles = "coordenador")]
     public class CoordenadorController : Controller
@@ -25,7 +22,7 @@ namespace GuiaPalestrasOnline.Controllers
         }
         public ActionResult CriarEvento()
         {
-            
+
             return View();
         }
         [HttpPost]
@@ -37,7 +34,7 @@ namespace GuiaPalestrasOnline.Controllers
                 Construtor.EventoApp().Save(entidade);
                 return RedirectToAction("Index");
             }
-            
+
             return View(entidade);
         }
         public ActionResult MeusEventos()
@@ -47,14 +44,14 @@ namespace GuiaPalestrasOnline.Controllers
         public ActionResult ListarPalestrasDesseEvento(string ID)
         {
             EventoId = ID;
-            return View(Construtor.TrilhaApp().MinhasTrilhas(Seguranca.Usuario().ID,ID));
+            return View(Construtor.TrilhaApp().MinhasTrilhas(Seguranca.Usuario().ID, ID));
         }
 
         public ActionResult PalestrasParaEssaTrilha(string id)
         {
             TrilhaId = id;
             ViewBag.nomeTrilha = new Contexto().SqlBd.Query<string>("select NomeTrilha from Trilha where Id = @trilhaId",
-                new {trilhaId = id}).FirstOrDefault();
+                new { trilhaId = id }).FirstOrDefault();
             var list = Construtor.EventoApp().ListarPalestraDesseEvento(id, Seguranca.Usuario().ID);
             return View(list);
         }
@@ -66,7 +63,7 @@ namespace GuiaPalestrasOnline.Controllers
 
         public ActionResult CriarTrilha()
         {
-            
+
             return View();
         }
         [HttpPost]
@@ -88,22 +85,48 @@ namespace GuiaPalestrasOnline.Controllers
             if (ModelState.IsValid)
             {
                 entidade.EventoId = EventoId;
-               Construtor.SalaApp().Save(entidade);
+                Construtor.SalaApp().Save(entidade);
                 return RedirectToAction("Index");
             }
             return View(entidade);
         }
 
-        public ActionResult AceitarPalestra(string id, string eventoId,string resposta)
+        public ActionResult AceitarPalestra(string id, string eventoId, string resposta)
         {
-            Construtor.EventoApp().ResponderRequisicao(id,eventoId,resposta,"","");
-            return RedirectToAction("PalestrasParaEssaTrilha/"+TrilhaId);
+            Construtor.EventoApp().ResponderRequisicao(id, eventoId, resposta, "", "","");
+            return RedirectToAction("PalestrasParaEssaTrilha/" + TrilhaId);
         }
 
         public ActionResult GerenciarEvento(string id)
         {
-            return View(Construtor.EventoApp().PalestrasRegistradadas(id, Seguranca.Usuario().ID));
+            EventoId = id;
+            ViewBag.eventId = id;
+            return View(Construtor.EventoApp().PalestrasRegistradas(id, Seguranca.Usuario().ID));
         }
+
+        public ActionResult EditarPalestraEvento(string id)
+        {
+            var palestra = Construtor.EventoApp().DetalhePalestra(id, Seguranca.Usuario().ID, EventoId);
+            var salas = Construtor.SalaApp().MinhasSalas(EventoId);
+            ViewBag.salas = new SelectList(salas, "ID", "NumeroSala",palestra.SalaId);
+            return View(palestra);
+        }
+        [HttpPost]
+        public ActionResult EditarPalestraEvento(PalestraSolicitadaViewModel palestra)
+        {
+            if (!ModelState.IsValid) return RedirectToAction("GerenciarEvento/" + EventoId);
+            palestra.CoordenadorId = Seguranca.Usuario().ID;
+            Construtor.EventoApp().PreencherPalestraParaEvento(palestra);
+
+            return RedirectToAction("GerenciarEvento/" + EventoId);
+        }
+
+        public JsonResult PublicarEvento(string variavel)
+        {
+            new Contexto().SqlBd.Query("update evento set Status = 'Usuario' where Id = @eId",new{eId=variavel});
+            return Json("");
+        }
+
         private static List<Palestra> RetornaPalestrasDisponiveisParaEvento(IEnumerable<Palestra> todasPalestras, IEnumerable<PalestraSolicitadaViewModel> minhasPalestras)
         {
             return (from palestra in todasPalestras let tempPalestra = minhasPalestras.FirstOrDefault(x => x.PalestraId == palestra.ID) where tempPalestra == null select palestra).ToList();

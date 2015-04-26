@@ -7,7 +7,6 @@ using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
-using GuiaPalestrasOnline.ViewModel;
 
 namespace GuiaPalestrasOnline.Controllers
 {
@@ -16,15 +15,8 @@ namespace GuiaPalestrasOnline.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(Construtor.EventoApp().GetAll());
+            return View();
         }
 
-        public ActionResult PalestrasParaEsteEvento(string id)
-        {
-            var _usuario = Seguranca.Usuario();
-
-            return RedirectToAction("Index/"+id,"Cadastro/Palestra");
-        }
-        
     }
 }
