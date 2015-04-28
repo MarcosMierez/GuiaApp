@@ -4,9 +4,9 @@
 <h2>Eventos Disponiveis</h2>
 @foreach (var eventos in Model)
 {
-    <a href="@Url.Action("PalestrasEvento","Usuario",new{id=@eventos.ID})">
+    <a href="@Url.Action("MinhasPalestras","Usuario",new{id=@eventos.ID})">
         <div class="col-md-3">
-            <div class="panel panel-primary">
+            <div class="panel panel-warning">
                 <div class="panel-heading">@eventos.Tema</div>
                 <div class="panel-body">
                     Local :@eventos.Local<br>
@@ -18,5 +18,4 @@
     </a>
 }
 <div style="clear:both"></div>
-
 

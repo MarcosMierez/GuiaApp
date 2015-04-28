@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 using Dapper;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Models;
 
@@ -44,7 +45,8 @@ namespace GuiaPalestrasOnline.Repositorio
 
         public Evento GetByID(string Id)
         {
-            throw new NotImplementedException();
+        return    contexto.SqlBd.Query<Evento>("select Id,Local,DiaInicial,DiaFinal,Tema,Local from evento where Id= @id",
+                new {id = Id}).FirstOrDefault();
         }
 
         public IEnumerable<Evento> GetAll()

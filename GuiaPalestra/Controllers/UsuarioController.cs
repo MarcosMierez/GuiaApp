@@ -12,6 +12,7 @@ namespace GuiaPalestra.Controllers
     public class UsuarioController : Controller
     {
         private readonly Usuario _usuario;
+        public static string _eventoId;
         public UsuarioController()
         {
             _usuario = Seguranca.Usuario();
@@ -26,21 +27,32 @@ namespace GuiaPalestra.Controllers
             
             return View(Construtor.EventoApp().EventosDisponiveis(_usuario.Permissao[0]));
         }
-
         public ActionResult PalestrasEvento(string id)
         {
-            return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id));
+            _eventoId = id;
+            return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id,_usuario.ID));
         }
-        public ActionResult MinhasPalestras()
+        public ActionResult EventosUsuario()
         {
-            return View();
+            return View(Construtor.EventoApp().EventosUsuario(_usuario.ID));
+        }
+        public ActionResult MinhasPalestras(string id)
+        {
+            _eventoId = id;
+            return View(Construtor.EventoApp().PalestrasAdicionadas(id,_usuario.ID));
+        }
+        public ActionResult Inscrever(string id, string eventoId,bool status,string trilhaId,string salaId)
+        {
+            Construtor.EventoApp().InscreverPalestraEvento(id, eventoId,_usuario.ID,status,trilhaId,salaId);
+            return RedirectToAction("PalestrasEvento/"+_eventoId,"Usuario");
         }
 
-        public ActionResult Inscrever(string id, string eventoId)
+        public ActionResult ConfirmarPresenca(string id,string palestraId)
         {
-            Construtor.EventoApp().InscreverPalestraEvento(id, eventoId);
-            return RedirectToAction("PalestraEvento");
+            Construtor.EventoApp().ConfirmarParticipacaoUsuario(id, palestraId, _usuario.ID);
+            return RedirectToAction("MinhasPalestras/" + _eventoId, "Usuario");
         }
+
   
     }
 }

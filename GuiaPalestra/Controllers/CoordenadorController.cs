@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using Dapper;
 using GuiaPalestra.Models;
@@ -109,6 +111,7 @@ namespace GuiaPalestra.Controllers
             var palestra = Construtor.EventoApp().DetalhePalestra(id, Seguranca.Usuario().ID, EventoId);
             var salas = Construtor.SalaApp().MinhasSalas(EventoId);
             ViewBag.salas = new SelectList(salas, "ID", "NumeroSala",palestra.SalaId);
+            ViewBag.datas = new SelectList(GetDatas(), "data", "data", palestra.Dia);
             return View(palestra);
         }
         [HttpPost]
@@ -127,9 +130,34 @@ namespace GuiaPalestra.Controllers
             return Json("");
         }
 
-        private static List<Palestra> RetornaPalestrasDisponiveisParaEvento(IEnumerable<Palestra> todasPalestras, IEnumerable<PalestraSolicitadaViewModel> minhasPalestras)
+        public IEnumerable<Datas> GetDatas()
         {
-            return (from palestra in todasPalestras let tempPalestra = minhasPalestras.FirstOrDefault(x => x.PalestraId == palestra.ID) where tempPalestra == null select palestra).ToList();
-        }//nao queira entender esse foreach
+            if (EventoId != null)
+            {
+                var evento = Construtor.EventoApp().GetById(EventoId);
+                var diaInicial = evento.DiaInicial;
+                var diaaFinal = evento.DiaFinal;
+                var ListaDatas = new List<Datas>();
+                if (diaInicial.Month == diaaFinal.Month)
+                {
+                    for (int i = diaInicial.Day; i <= diaaFinal.Day; i++)
+                    {
+                        var tempData = new Datas
+                        {
+                            data= (Convert.ToDateTime(i + "/" + diaInicial.Month + "/" + diaInicial.Year))
+                        };
+                        ListaDatas.Add(tempData);
+                    }
+                }
+                return ListaDatas;
+            }
+            return new List<Datas>();
+        }
+
+        public struct Datas
+        {
+            public DateTime data { get; set; }
+        }
+
     }
 }

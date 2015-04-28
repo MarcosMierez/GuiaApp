@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
+using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Models
+namespace GuiaPalestra.Models
 {
     public class Evento : Entidade
     {

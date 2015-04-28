@@ -284,6 +284,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usuario\EventosDisponiveis.cshtml" />
     <Content Include="Views\Usuario\PalestrasEvento.cshtml" />
+    <Content Include="Views\Usuario\EventosUsuario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

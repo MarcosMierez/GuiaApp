@@ -1,1 +1,51 @@
-﻿
+﻿@using System.Diagnostics
+@model IEnumerable<GuiaPalestra.ViewModel.PalestraViewModel>
+
+
+<h2>Palestras desse Evento</h2>
+
+<table class="table table-bordered ">
+    <tr class="success">
+        <th>
+            Titulo
+        </th>
+        <th>
+            Duração
+        </th>
+        <th>
+            Trilha
+        </th>
+        <th>
+            Sala
+        </th>
+        <th>Dia</th>
+        <th>Confirmar</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+                @Html.Hidden(item.Id)
+            </td>
+            <td>
+                @item.HorarioInicial.ToString("HH:mm") <strong> as </strong>@item.HorarioFinal.ToString("HH:mm")
+            </td>
+            <td>
+                @item.NomeTrilha
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroSala)
+            </td>
+            <td>
+                @item.Dia.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                <a href="@Url.Action("ConfirmarPresenca", "Usuario", new {id = item.EventoId, palestraId = item.Id})" class="btn btn-success">Confirmar</a>
+            </td>
+
+        </tr>
+    }
+
+</table>

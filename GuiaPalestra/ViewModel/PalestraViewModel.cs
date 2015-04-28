@@ -17,5 +17,6 @@ namespace GuiaPalestra.ViewModel
         public string NomeTrilha { get; set; }
         public bool Inscrito { get; set; }
         public string EventoId { get; set; }
+        public DateTime Dia { get; set; }
     }
 }

@@ -56,15 +56,12 @@
         {
             <p>não há vagas</p>
         }
-        else if (item.Inscrito != true)
-        {
-            <a class="glyphicon glyphicon-check" href="@Url.Action("Inscrever","Usuario",new{id=item.Id,eventoId=item.EventoId})"></a>
-        }
         else
         {
-            <a class="glyphicon glyphicon-remove-circle"></a>
+            <a class="glyphicon glyphicon-check" href="@Url.Action("Inscrever","Usuario",new{id=item.Id,eventoId=item.EventoId,status=true,trilhaID=item.TrilhaId,salaId=item.SalaId})"></a>
         }
                 }
+
 
 
             </td>

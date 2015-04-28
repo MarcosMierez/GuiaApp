@@ -58,11 +58,17 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vagas, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Vagas, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                <input type="number" name="Vagas" id="Vagas" class="form-control" />
-                @Html.ValidationMessageFor(model => model.Vagas, "", new { @class = "text-danger" })
+                <input type="number" name="Vagas" id="Vagas" class="form-control" value="@Model.Vagas"/>
+                @Html.ValidationMessageFor(model => model.Vagas, "", new {@class = "text-danger"})
             </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Dia", (SelectList)ViewBag.datas, new { @class = "form-control" })
         </div>
 
 
