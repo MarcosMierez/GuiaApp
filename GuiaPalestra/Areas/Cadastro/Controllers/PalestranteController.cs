@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
+using GuiaPalestra.Helpers;
+using GuiaPalestra.Models;
+using GuiaPalestra.ViewModel;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Areas.Cadastro.Controllers
-{ 
+namespace GuiaPalestra.Areas.Cadastro.Controllers
+{
     public class PalestranteController : Controller
     {
-        // GET: Cadastro/Palestrante
-       
+        private Usuario _usuario;
+
+        public PalestranteController()
+        {
+            _usuario = Seguranca.Usuario();
+        }
+
         public ActionResult Index()
         {
-            
+
             return View(Construtor.PalestranteApp().GetAll());
         }
 
@@ -26,23 +31,42 @@ namespace GuiaPalestrasOnline.Areas.Cadastro.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Palestrante entidade)
         {
-            Construtor.PalestranteApp().Save(entidade);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Construtor.PalestranteApp().Save(entidade);
+                return RedirectToAction("Index");
+            }
+            return View(entidade);
+
         }
         public ActionResult Detalhe(string Id)
         {
-          return  View(Construtor.PalestranteApp().Details(Id));
+            return View(Construtor.PalestranteApp().Details(Id));
         }
 
         public ActionResult Editar(string id)
         {
-            return View(Construtor.PalestranteApp().Details(id));
+            var palestranteVM = ConvertVM(Construtor.PalestranteApp().Details(id));
+            return View(palestranteVM);
         }
         [HttpPost]
-        public ActionResult Editar(Palestrante entidade)
+        public ActionResult Editar(PalestranteVM entidade)
         {
-           Construtor.PalestranteApp().Edit(entidade);
-            return RedirectToAction("Index");
+            var palestranteBD = Construtor.PalestranteApp().Details(entidade.ID);
+            entidade.PhotoPath = palestranteBD.Foto;
+            if (ModelState.IsValid && palestranteBD != null)
+            {
+                var palestranteModel = ConvertModel(entidade);
+                if (entidade.Photo!=null)
+                {
+                    palestranteModel.Foto = UploadPhoto.UploadPhotos(entidade.Photo, _usuario.Permissao[0], palestranteBD.Foto);
+                }
+                
+                Construtor.PalestranteApp().Edit(palestranteModel);
+                return RedirectToAction("Index");
+            }
+            return View(entidade);
+
         }
 
         public ActionResult Delete(string id)
@@ -50,6 +74,34 @@ namespace GuiaPalestrasOnline.Areas.Cadastro.Controllers
             Construtor.PalestranteApp().Remove(id);
             return RedirectToAction("Index");
         }
+
+        private PalestranteVM ConvertVM(Palestrante palestrante)
+        {
+            var tempPalestrante = new PalestranteVM
+            {
+                ID = palestrante.ID,
+                Email = palestrante.Email,
+                Nome = palestrante.Nome,
+                TwitterPalestrante = palestrante.TwitterPalestrante,
+                PhotoPath =palestrante.Foto
+
+            };
+            return tempPalestrante;
+        }
+        private Palestrante ConvertModel(PalestranteVM palestrante)
+        {
+            var tempPalestrante = new Palestrante
+            {
+                ID = palestrante.ID,
+                Email = palestrante.Email,
+                Nome = palestrante.Nome,
+                TwitterPalestrante = palestrante.TwitterPalestrante,
+                Foto = palestrante.PhotoPath
+            };
+            return tempPalestrante;
+        }
+
+
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Dapper;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
 
@@ -22,17 +23,6 @@ namespace GuiaPalestrasOnline.Aplicacao
         {
           return  User.Logar(email, senha);
         }
-
-        public void ParticiparPalestra(string usuarioId, string palestraId,string eventoId,string status)
-        {
-             User.ParticiparPalestra(usuarioId, palestraId,eventoId,status);
-        }
-
-        public void DesistirPalestra(string usuarioId, string palestraId)
-        {
-            User.DesistirPalestra(usuarioId,palestraId);
-        }
-
         public void Save(Usuario entidade)
         {
             repositorio.Save(entidade);

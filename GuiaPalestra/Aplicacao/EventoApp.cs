@@ -249,7 +249,7 @@ namespace GuiaPalestra.Aplicacao
         public List<PalestraViewModel> PalestrasAdicionadas(string id, string usuarioId)
         {
             return contexto.SqlBd.Query<PalestraViewModel>(
-                  "select p.Id ,p.Titulo,s.Id SalaId,s.NumeroSala,t.Id TrilhaId,t.NomeTrilha ,pe.EventoId,ep.HorarioInicial,ep.HorarioFinal,ep.Dia   " +
+                  "select p.Id ,p.Titulo,s.Id SalaId,s.NumeroSala,t.Id TrilhaId,t.NomeTrilha ,pe.EventoId,ep.HorarioInicial,ep.HorarioFinal,ep.Dia,pe.Status   " +
                   "from evento e ,palestra p,sala s,trilha t,palestrausuario pe ,palestraevento ep " +
                   "where e.Id=pe.EventoId and " +
                   "p.Id = pe.PalestraId and " +
@@ -325,6 +325,12 @@ namespace GuiaPalestra.Aplicacao
                                                              pid = palestraId,
                                                              uid = usuarioId
                                                          });
+                int vagas = contexto.SqlBd.Query<int>("select p.Vagas from palestraevento p where EventoId= @eid and PalestraId= @pid",new{eid=eventoId,pid=palestraId}).FirstOrDefault();
+                if (vagas!=null || vagas>=1)
+                {
+                    contexto.SqlBd.Query("update palestraevento set Vagas = @vaga where Eventoid= @eid and PalestraId = @pid" , new {vaga = (vagas-1),eid=eventoId,pid=palestraId});
+                    contexto.SqlBd.Query("update palestrausuario set Status = '0' where EventoId= @eid and PalestraId = @pid and UsuarioId= @uid",new{eid=eventoId,pid=palestraId,uid=usuarioId});
+                }
                 return true;
             }
 

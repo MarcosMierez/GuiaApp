@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.AccessControl;
 
 namespace GuiaPalestra.ViewModel
 {
@@ -18,5 +19,6 @@ namespace GuiaPalestra.ViewModel
         public bool Inscrito { get; set; }
         public string EventoId { get; set; }
         public DateTime Dia { get; set; }
+        public bool Status { get; set; }
     }
 }

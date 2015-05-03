@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using Dapper;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
@@ -28,7 +29,7 @@ namespace GuiaPalestrasOnline.Aplicacao
             if (!string.IsNullOrEmpty(emailCoordenador) && !string.IsNullOrEmpty(senhaCoordenador))
             {
                 var coordenador = _contexto.SqlBd.Query<dynamic>(
-                    "select Id,Nome,Email,Permissao from Coordenador where email= @email and senha = @senha",
+                    "select Id,Nome,Email,Permissao,Foto from Coordenador where email= @email and senha = @senha",
                     new { email = emailCoordenador, senha = senhaCoordenador }).FirstOrDefault();
                 if (coordenador != null)
                 {
@@ -38,6 +39,7 @@ namespace GuiaPalestrasOnline.Aplicacao
                         Email = coordenador.Email,
                         ID = coordenador.Id,
                         Nome = coordenador.Nome,
+                        Foto = coordenador.Foto,
                         Permissao = permissao.Split(',').ToList()
                     };
                     Seguranca.GerearSessaoDeUsuario(tempUsuario);

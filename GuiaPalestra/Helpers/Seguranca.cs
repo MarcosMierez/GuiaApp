@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
@@ -51,6 +52,11 @@ namespace GuiaPalestra.Controllers
         {
             Construtor.EventoApp().ConfirmarParticipacaoUsuario(id, palestraId, _usuario.ID);
             return RedirectToAction("MinhasPalestras/" + _eventoId, "Usuario");
+        }
+
+        public ActionResult RelatorioDePalestras()
+        {
+            return View();
         }
 
   

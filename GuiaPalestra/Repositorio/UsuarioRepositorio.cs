@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Web;
 using Dapper;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Models;
 
@@ -21,14 +22,14 @@ namespace GuiaPalestrasOnline.Repositorio
         {
             
             contexto.SqlBd.Query(
-                "insert into usuario (Id,NomeUsuario,SenhaUsuario,EmailUsuario,Permissao) values (@Id,@name,@email,@password,@claim)",
-                new {ID=entidade.ID, name = entidade.Nome.ToLower(), email = entidade.Email.ToLower(), password = entidade.Senha.ToLower(), claim = "Usuario"});
+                "insert into usuario (Id,NomeUsuario,SenhaUsuario,EmailUsuario,Permissao,Foto) values (@Id,@name,@password,@email,@claim,'GenericPhoto.png')",
+                new {ID=entidade.ID, name = entidade.Nome.ToLower(), password = entidade.Senha.ToLower(),email=entidade.Email.ToLower(), claim = "Usuario"});
         }
 
         public void Update(Usuario entidade)
         {
-            contexto.SqlBd.Query("update usuario set NomeUsuario= @name , EmailUsuario = @email where Id = @id",
-                new {name = entidade.Nome.ToLower(), email = entidade.Email.ToLower(),id=entidade.ID});
+            contexto.SqlBd.Query("update usuario set NomeUsuario= @name , EmailUsuario = @email,Foto = @photo where Id = @id",
+                new {name = entidade.Nome.ToLower(), email = entidade.Email.ToLower(),photo=entidade.Foto,id=entidade.ID});
         }
 
         public void Delete(string Id)
@@ -38,7 +39,7 @@ namespace GuiaPalestrasOnline.Repositorio
 
         public Usuario GetByID(string Id)
         {
-            return contexto.SqlBd.Query<Usuario>("Select Id,NomeUsuario Nome,EmailUsuario Email from usuario where Id = @id", new { id = Id }).First();
+            return contexto.SqlBd.Query<Usuario>("Select Id,NomeUsuario Nome,EmailUsuario Email,Foto from usuario where Id = @id", new { id = Id }).First();
         }
 
         public IEnumerable<Usuario> GetAll()
@@ -50,7 +51,7 @@ namespace GuiaPalestrasOnline.Repositorio
         {
 
             var tempUser = contexto.SqlBd.Query<dynamic>(
-                    "Select Id,NomeUsuario,EmailUsuario,Permissao from usuario where SenhaUsuario= @Senha and EmailUsuario = @Email",
+                    "Select Id,NomeUsuario,EmailUsuario,Permissao,Foto from usuario where SenhaUsuario= @Senha and EmailUsuario = @Email",
                     new { Email = email, Senha = senha }).FirstOrDefault();
             if (tempUser == null)
                 return new Usuario();
@@ -60,21 +61,10 @@ namespace GuiaPalestrasOnline.Repositorio
                 ID = tempUser.Id,
                 Email = tempUser.EmailUsuario,
                 Nome = tempUser.NomeUsuario,
+                Foto = tempUser.Foto,
                 Permissao = permissoes.Split(',').ToList()
             };
             return tempUsusario;
-        }
-
-        public void ParticiparPalestra(string palestraId, string usuarioId, string eventoId, string status)
-        {
-            contexto.SqlBd.Query("insert into palestrasusuario(PalestraId,UsuarioId,EventoId,Status) values(@pId,@uId,@eId,@st)",
-                new {pId = palestraId,uId=usuarioId,eId=eventoId,st=status });
-        }
-
-        public void DesistirPalestra(string usuarioId, string palestraId)
-        {
-            contexto.SqlBd.Query("delete from palestrasusuario where palestrasusuario.UsuarioId = @uId and palestrasusuario.PalestraId = @pId",
-                new { uId = usuarioId, pId = palestraId });
         }
 
 

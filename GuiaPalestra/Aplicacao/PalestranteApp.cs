@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Dapper;
+using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Helpers;
 using GuiaPalestrasOnline.Models;
 using GuiaPalestrasOnline.Repositorio;
@@ -42,7 +43,7 @@ namespace GuiaPalestrasOnline.Aplicacao
         public Usuario LogarPalestrante(string email, string senha)
         {
             var tempPalestrante=contexto.SqlBd.Query<dynamic>(
-                "select nomepalestrante as Nome,Id,emailPalestrante as Email,Permissao from palestrante where emailPalestrante = @Email and Senha = @Senha",
+                "select nomepalestrante as Nome,Id,emailPalestrante,Foto as Email,Permissao from palestrante where emailPalestrante = @Email and Senha = @Senha",
                 new {Email = email, Senha = senha}).FirstOrDefault();
             if (tempPalestrante == null)
             return new Usuario();
@@ -52,6 +53,7 @@ namespace GuiaPalestrasOnline.Aplicacao
                     ID = tempPalestrante.Id,
                     Nome = tempPalestrante.Nome,
                     Email = tempPalestrante.Email,
+                    Foto = tempPalestrante.Foto,
                     Permissao = permissoes.Split(',').ToList()
                 };
                 return tempUsuario;

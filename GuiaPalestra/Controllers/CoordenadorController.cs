@@ -34,7 +34,8 @@ namespace GuiaPalestra.Controllers
             {
                 entidade.CoordenadorId = Seguranca.Usuario().ID;
                 Construtor.EventoApp().Save(entidade);
-                return RedirectToAction("Index");
+                EventoId = entidade.ID;
+                return RedirectToAction("CriarTrilha");
             }
 
             return View(entidade);
@@ -74,7 +75,7 @@ namespace GuiaPalestra.Controllers
             entidade.CoordenadorId = Seguranca.Usuario().ID;
             entidade.EventoId = EventoId;
             Construtor.TrilhaApp().Save(entidade);
-            return RedirectToAction("CriarTrilha");
+            return RedirectToAction("ListarPalestrasDesseEvento/"+EventoId,"Coordenador");
         }
 
         public ActionResult CriarSala()

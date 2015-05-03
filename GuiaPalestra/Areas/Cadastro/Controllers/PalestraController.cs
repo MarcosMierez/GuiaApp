@@ -54,10 +54,5 @@ namespace GuiaPalestrasOnline.Areas.Cadastro.Controllers
             ViewBag.palestrantes = palestrantes.Nome;
         }
 
-        public ActionResult Inscrever(string ID)
-        {
-            Construtor.UsuarioApp().ParticiparPalestra(ID,_usuario.ID,eventoId,"solicitada");
-            return RedirectToAction("Index/"+eventoId);
-        }
     }
 }

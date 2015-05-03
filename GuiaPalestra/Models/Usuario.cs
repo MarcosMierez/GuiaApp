@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Models
+namespace GuiaPalestra.Models
 {
     public class Usuario :Entidade
     {
@@ -11,5 +9,6 @@ namespace GuiaPalestrasOnline.Models
         public string Nome { get; set; }
         public List<string> Permissao { get; set; }
         public string Senha { get; set; }
+        public string Foto { get; set; }
     }
 }

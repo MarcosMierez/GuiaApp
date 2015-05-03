@@ -42,10 +42,21 @@
                 @item.Dia.ToString("dd/MM/yyyy")
             </td>
             <td>
-                <a href="@Url.Action("ConfirmarPresenca", "Usuario", new {id = item.EventoId, palestraId = item.Id})" class="btn btn-success">Confirmar</a>
-            </td>
+                @{
+        if (item.Status.Equals(true))
+        {
+            <a href="@Url.Action("ConfirmarPresenca", "Usuario", new {id = item.EventoId, palestraId = item.Id})" class="btn btn-success">Confirmar</a>
+        }
+        else
+        {
+            <a class="btn btn-warning">Confirmado</a>
+        }
 
-        </tr>
+            }
+
+        </td>
+
+    </tr>
     }
 
 </table>

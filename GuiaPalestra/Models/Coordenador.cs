@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Models
+namespace GuiaPalestra.Models
 {
     public class Coordenador:Usuario
     {
