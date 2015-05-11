@@ -18,24 +18,27 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return View(new Usuario());
         }
         [HttpPost]
         public ActionResult Index(Usuario entidade)
         {
             if (ModelState.IsValid)
             {
-                Construtor.UsuarioApp().Save(entidade);
+               Construtor.UsuarioApp().Save(entidade);
+                return RedirectToAction("Acesso", "Index");
             }
 
             return View(entidade);
         }
         [Authorize(Roles = "Usuario")]
-        public ActionResult Update(string id)
+        public ActionResult Update()
         {
-
-            return View(ConvertVM(Construtor.UsuarioApp().GetById(id)));
-
+            return View(ConvertVM(Construtor.UsuarioApp().GetById(_usuario.ID)));
+        }
+        public ActionResult Detalhes()
+        {
+            return View(ConvertVM(Construtor.UsuarioApp().GetById(_usuario.ID)));
         }
         [Authorize(Roles = "Usuario")]
         [HttpPost]
@@ -54,6 +57,7 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
                 }
 
                 Construtor.UsuarioApp().Update(coordenadorModel);
+                return RedirectToAction("Detalhes", "UsuarioM");
             }
             return View(entidade);
 

@@ -1,14 +1,33 @@
 ﻿
-<h2>Login de Usuario</h2>
+<div class="center-align">
+    <h2 class="headers">
+        Acesso de Usuario
+    </h2>
+</div>
 <form action="" method="post">
 
-    <label>Email</label>
-    <input type="text" value="" name="EmailUsuario" id="EmailEusuario" />
-    <label>Senha</label>
-    <input type="text" value="" name="SenhaUsuario" id="SenhaUsuario" />
-    <input type="submit" value="Logar"/>
-    <br/>
-    <br/>
-    Ou
-    <a href="@Url.Action("LoginPalestrante","Acesso")">Logar como palestrante</a>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="EmailUsuario" name="EmailUsuario" class="validate" type="text">
+            <label class="active" for="EmailUsuario">Email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="SenhaUsuario" name="SenhaUsuario" class="validate" type="password">
+            <label class="active" for="SenhaUsuario">Senha</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <button type="submit" class="waves-effect waves-light btn ">Logar</button>
+        </div>
+        <div class="right-align">
+            <div class="input-field col s6">
+                <a href="@Url.Action("UsuarioM","Index")" class="waves-effect waves-light btn orange ">Registrar</a>
+            </div>
+        </div>
+    </div>
+
 </form>
+

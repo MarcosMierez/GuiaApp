@@ -160,5 +160,10 @@ namespace GuiaPalestra.Controllers
             public DateTime data { get; set; }
         }
 
+        public ActionResult GerarRelatorioEvento(string id)
+        {
+            return View(Construtor.EventoApp().UsuarioConfirmados(id));
+        }
+
     }
 }

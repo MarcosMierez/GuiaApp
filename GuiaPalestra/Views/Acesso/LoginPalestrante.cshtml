@@ -1,18 +1,26 @@
 ﻿
 
-<h2>
-    Login de Palestrante
-</h2>
-<form action="" method="post">
+<div class="center-align">
+    <h2 class="headers">
+        Acesso de Palestrante
+    </h2>
+</div><form action="" method="post">
 
-    <label>Email</label>
-    <input type="text" value="" name="emailPalestrante" id="emailPalestrante" />
-    <label>Senha</label>
-    <input type="text" value="" name="senhaPalestrante" id="senhaPalestrante" />
-    <input type="submit" value="Logar"/>
-    <br />
-    <br />
-    Ou
-    <a href="@Url.Action("Index","Acesso")">Logar como Usuario</a>
-
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="emailPalestrante" name="emailPalestrante" class="validate" type="text">
+            <label class="active" for="emailPalestrante">Email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="senhaPalestrante" name="senhaPalestrante" class="validate" type="password">
+            <label class="active" for="senhaPalestrante">Senha</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <button type="submit" class="waves-effect waves-light btn ">Logar</button>
+        </div>
+    </div>
 </form>

@@ -22,8 +22,8 @@ namespace GuiaPalestrasOnline.Repositorio
         {
             
             contexto.SqlBd.Query(
-                "insert into usuario (Id,NomeUsuario,SenhaUsuario,EmailUsuario,Permissao,Foto) values (@Id,@name,@password,@email,@claim,'GenericPhoto.png')",
-                new {ID=entidade.ID, name = entidade.Nome.ToLower(), password = entidade.Senha.ToLower(),email=entidade.Email.ToLower(), claim = "Usuario"});
+                "insert into usuario (Id,NomeUsuario,SenhaUsuario,EmailUsuario,Permissao,Foto,Sexo) values (@Id,@name,@password,@email,@claim,'GenericPhoto.png',@sx)",
+                new {ID=entidade.ID, name = entidade.Nome.ToLower(), password = entidade.Senha.ToLower(),email=entidade.Email.ToLower(), claim = "Usuario",sx=entidade.Sexo});
         }
 
         public void Update(Usuario entidade)

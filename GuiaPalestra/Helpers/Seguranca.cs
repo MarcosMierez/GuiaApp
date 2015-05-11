@@ -20,6 +20,7 @@ namespace GuiaPalestrasOnline.Helpers
                 new Claim("ID", usuarioLogado.ID),
                 new Claim(ClaimTypes.Name,usuarioLogado.Nome),
                 new Claim(ClaimTypes.Email, usuarioLogado.Email),
+                new Claim("Foto",usuarioLogado.Foto)
             };
             claims.AddRange(usuarioLogado.Permissao.Select(permissao => new Claim(ClaimTypes.Role, permissao)));
             var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
@@ -45,6 +46,7 @@ namespace GuiaPalestrasOnline.Helpers
                 ID = user.FindFirst("ID").Value,
                 Email = user.FindFirst(ClaimTypes.Email).Value,
                 Nome = user.FindFirst(ClaimTypes.Name).Value,
+                Foto = user.FindFirst("Foto").Value,
                Permissao = new List<string>()
             };
             usuario.Permissao.Add(user.FindFirst(ClaimTypes.Role).Value);

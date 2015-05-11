@@ -12,5 +12,7 @@ namespace GuiaPalestra.ViewModel
         public HttpPostedFileBase Photo { get; set; }
         public string PhotoPath { get; set; }
         public string Email { get; set; }
+
+        public char Sexo { get; set; }
     }
 }

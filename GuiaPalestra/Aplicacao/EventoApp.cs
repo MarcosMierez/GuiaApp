@@ -35,7 +35,7 @@ namespace GuiaPalestra.Aplicacao
         }
         public IEnumerable<Evento> EventosDisponiveis(string permissao)
         {
-            return contexto.SqlBd.Query<Evento>("select Id,Local,Tema,DiaInicial,DiaFinal from evento e where Status = @role ", new { role = permissao }).ToList();
+            return contexto.SqlBd.Query<Evento>("select e.Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal,c.Nome NomeCoordenador from evento e,coordenador c where e.Status = @role and c.Id = e.CoordenadorId", new { role = permissao }).ToList();
         }
         public List<Evento> MeusEventos(string coordenadorId)
         {
@@ -335,6 +335,24 @@ namespace GuiaPalestra.Aplicacao
             }
 
             return false;
+        }
+
+        public IEnumerable<UsuariosConfirmadosVM> RelatorioPalestras(string e,string u)
+        {
+            return contexto.SqlBd.Query<UsuariosConfirmadosVM>("select e.Tema,p.Titulo,pe.HorarioInicial,pe.HorarioFinal,s.NumeroSala Sala,S.Descricao from evento e ,palestra p,palestraevento pe,usuariosconfirmados uc,sala s where uc.EventoId=e.Id and uc.PalestraId=p.Id and pe.salaId=s.Id and pe.eventoId=e.Id and pe.PalestraId = p.Id and uc.usuarioId = @uid and uc.EventoId = @eid", new {uid = u ,eid=e}).ToList();
+
+        }
+
+        public IEnumerable<UsuariosConfirmadosVM>UsuarioConfirmados(string eventoId)
+        {
+            return contexto.SqlBd.Query<UsuariosConfirmadosVM>("SELECT u.Foto,u.NomeUsuario,u.EmailUsuario,e.Tema,p.Titulo,pe.HorarioInicial,pe.HorarioFinal from evento e,usuario u,palestra p,usuariosconfirmados uc,palestraevento pe where uc.eventoId=e.Id and uc.usuarioid=u.id and uc.palestraid = p.id and uc.EventoId = @eid group by u.NomeUsuario order by p.Titulo",new{eid=eventoId}).ToList();
+        }
+
+        public IEnumerable<PalestranteVM> PalestrantesEvento(string _eventoId)
+        {
+            return contexto.SqlBd.Query<PalestranteVM>(
+                "select p.Id,p.NomePalestrante Nome,p.EmailPalestrante Email,p.Foto PhotoPath from palestrante p,palestraevento pe,palestra pl where pe.palestraId= pl.Id and pl.PalestranteId = p.Id and pe.EventoId = @eid group by(p.Id)",
+                new {eid = _eventoId}).ToList();
         }
     }
 }

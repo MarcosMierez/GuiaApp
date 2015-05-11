@@ -1,82 +1,60 @@
-﻿@model GuiaPalestra.ViewModel.PalestraSolicitadaViewModel
-
+﻿@using GuiaPalestra.Models
+@model GuiaPalestra.ViewModel.PalestraSolicitadaViewModel
 <h2>Organizar Palestra</h2>
-
-<form action="" method="POST">
-
-
-
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            
-            @Html.LabelFor(model => model.Titulo, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                <input type="text" value="@Model.Titulo" class="form-control" disabled=""/>
-                @Html.HiddenFor(model=>model.PalestraId)
-                @Html.HiddenFor(model => model.EventoId)
+<div class="row">
+    <form class="col s12" method="POST" action="">
+        <div class="card" style="padding: 30px">
+            @Html.HiddenFor(model=>model.PalestraId)
+            @Html.HiddenFor(model => model.EventoId)
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="@Model.Titulo" type="text" disabled="" value="@Model.Titulo">
+                    <label>Titulo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="@Model.Nome" type="text" disabled="">
+                    <label>Palestrante</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="@Model.NomeTrilha" type="text" disabled="">
+                    <label>Trilha</label>
+                </div>
+            </div>
+            <label>Salas Disponiveis</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.DropDownList("SalaId", (SelectList)ViewBag.salas, new { @class = "browser-default" })
+                </div>
+            </div>
+            <label>Datas Diponiveis</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.DropDownList("Dia", (SelectList)ViewBag.datas, new { @class = "browser-default" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="@Model.HoraInicial.ToString("HH:mm")" type="text" name="HoraInicial" id="HoraInicial">
+                    <label>Horario Inicial</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="@Model.HoraFinal.ToString("HH:mm")" type="text" name="HoraFinal" id="HoraFinal">
+                    <label>Horario Final</label>
+                </div>
+            </div>
+            <div class="right-align">
+                <button class="waves-effect waves-light btn ">Organizar</button>
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" value="@Model.Nome" class="form-control" disabled="" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                <input type="text" value="@Model.Email" class="form-control" disabled="" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Sala", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SalaId", (SelectList)ViewBag.salas, new { @class = "form-control" })
-                
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HoraInicial, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="time" id="HoraInicial" name="HoraInicial" class="form-control" value="@Model.HoraInicial.ToString("HH:mm")" />
-                @Html.ValidationMessageFor(model => model.HoraInicial, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HoraFinal, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                <input type="time" id="HoraFinal" name="HoraFinal" class="form-control" value="@Model.HoraFinal.ToString("HH:mm")"/>
-                @Html.ValidationMessageFor(model => model.HoraFinal, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vagas, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                <input type="number" name="Vagas" id="Vagas" class="form-control" value="@Model.Vagas"/>
-                @Html.ValidationMessageFor(model => model.Vagas, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Dia", (SelectList)ViewBag.datas, new { @class = "form-control" })
-        </div>
+    </form>
+</div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-success" />
-            </div>
-        </div>
-    </div>
+
 </form>
-

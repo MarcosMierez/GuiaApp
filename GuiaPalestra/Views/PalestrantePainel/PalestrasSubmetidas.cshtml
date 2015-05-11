@@ -15,7 +15,7 @@
         <tr>
             <th>@item.Titulo</th>
             <th>@item.Pendencia</th>
-            <th><a class="glyphicon glyphicon-remove"></a></th>
+            <th><a class="mdi-action-highlight-remove medium"></a></th>
             @if (@item.Pendencia == "aceita")
             {
                 <th><a href="@Url.Action("ConfirmarPalestra", "PalestrantePainel", new {eventoId = @item.EventoId, palestraId = @item.PalestraId, coordenadorId = @item.CoordenadorId,resposta = "confirmada",trilhaId=@item.TrilhaId})">Confirmar Palestra</a></th>

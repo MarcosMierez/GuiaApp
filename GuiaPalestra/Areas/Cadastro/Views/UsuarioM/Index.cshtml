@@ -1,51 +1,35 @@
 ﻿@model GuiaPalestra.Models.Usuario
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-@using (Html.BeginForm()) 
-{
-   
-    
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+<h2 class="headers">Registro de Usuarios</h2>
+<div class="card-panel grey lighten-5 z-depth-1">
+    <form class="col s12" enctype="multipart/form-data" method="POST" action="">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="Nome" id="Nome">
+                <label>Nome</label>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            <div class="input-field col s12">
+                <input type="text" class="validate" id="Email" name="Email">
+                <label>Email</label>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="password" id="Senha" name="Senha" class="form-control"/>
-                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+            <div class="input-field col s12">
+                <input type="password" class="validate" id="Senha" name="Senha">
+                <label>Senha</label>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="input-field col s12">
+                <p>
+                    <input name="@Model.Sexo" type="radio" id="m"/>
+                    <label for="m">Masculino</label>
+                </p>
+                <p>
+                    <input name="@Model.Sexo" type="radio" id="f"/>
+                    <label for="f">Feminino</label>
+                </p>
             </div>
-        </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        </div>
+        <p class="right-align">
+            <button type="submit" class="waves-effect waves-light btn green">Registrar</button>
+        </p>
+    </form>
 </div>

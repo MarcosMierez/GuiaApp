@@ -1,19 +1,29 @@
 ﻿
 
-<h2>
-    Login de Coordenador
-</h2>
+<div class="center-align">
+    <h2 class="headers">
+        Acesso de Coordenador
+    </h2>
+</div>
+
 <form action="" method="post">
 
-    <label>Email</label>
-    <input type="text" value="" name="emailCoordenador" id="emailCoordenador" />
-    <label>Senha</label>
-    <input type="text" value="" name="senhaCoordenador" id="senhaCoordenador" />
-    <input type="submit" value="Logar" />
-    <br />
-    <br />
-    Ou
-    <a href="@Url.Action("Index", "Acesso")">Logar como Usuario</a>
-    <a href="@Url.Action("LoginPalestrante","Acesso")">Logar como Palestrante</a>
-
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="emailCoordenador" name="emailCoordenador" class="validate" type="text">
+            <label class="active" for="emailCoordenador">Email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="senhaCoordenador" name="senhaCoordenador" class="validate" type="password">
+            <label class="active" for="senhaCoordenador">Senha</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <button type="submit" class="waves-effect waves-light btn ">Logar</button>
+        </div>
+    </div>
 </form>
+

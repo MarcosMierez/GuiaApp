@@ -1,0 +1,28 @@
+﻿@model GuiaPalestra.ViewModel.UsuarioVM
+
+<h2 class="headers">Dados Pessoais</h2>
+<div class="card-panel grey lighten-5 z-depth-1">
+    <form class="col s12">
+        <div class="center-align">
+            <div class="col s2">
+                <img src="~/Content/Uploads/Usuario/@Model.PhotoPath" class="circle" alt="" width="100" height="100"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="mdi-action-perm-contact-cal prefix"></i>
+                <input type="text" value="@Model.Nome" disabled="">
+                <label>Nome</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="mdi-communication-email prefix"></i>
+                <input type="text" class="validate" value="@Model.Email" disabled="">
+                <label>Email</label>
+            </div>
+        </div>
+        <p class="right-align">
+            <a href="@Url.Action("Update","UsuarioM")" class="waves-effect waves-light btn orange">Alterar Dados</a>
+        </p>
+    </form>
+</div>

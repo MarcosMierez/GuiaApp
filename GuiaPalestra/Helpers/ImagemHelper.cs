@@ -21,7 +21,7 @@ namespace GuiaPalestra.Helpers
             var path = MontaPath(diretorio, nomeUnico);
 
             var imagem = new WebImage(arquivo.InputStream);
-            imagem.Resize(200, 200);
+            imagem.Resize(100, 100);
             imagem.Save(path);
 
             return nomeUnico;

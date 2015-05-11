@@ -1,9 +1,14 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<p>Olá @User.Identity.Name</p>
 
-<h2>Index</h2>
-<a href="@Url.Action("EventosUsuario", "Usuario")">Palestras que estou Escrito</a>
-<a href="@Url.Action("EventosDisponiveis", "Usuario")">Eventos</a>
+<div class="row" >
+    <div class="col m12">
+        <div class="card small">
+            <ul class="" style="padding: 10px;">
+                <li><i class="mdi-notification-event-note"></i><a href="@Url.Action("EventosDisponiveis", "Usuario")"> Eventos</a></li>
+                <li><i class="mdi-editor-border-color"></i><a href="@Url.Action("EventosUsuario", "Usuario")"> Minhas Inscrições</a></li>
+                <li><i class="mdi-action-settings"></i><a href="~/Cadastro/UsuarioM/Detalhes"> Dados Cadastrais</a></li>
+            </ul>
 
+        </div>
+    </div>
+</div>

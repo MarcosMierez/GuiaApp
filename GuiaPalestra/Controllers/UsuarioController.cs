@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Dapper;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
@@ -22,15 +23,17 @@ namespace GuiaPalestra.Controllers
         {
             return View();
         }
-
         public ActionResult EventosDisponiveis()
         {
-            
             return View(Construtor.EventoApp().EventosDisponiveis(_usuario.Permissao[0]));
         }
         public ActionResult PalestrasEvento(string id)
         {
             _eventoId = id;
+            ViewBag.contador =
+                new Contexto().SqlBd.Query<int>(
+                    "select count(uc.UsuarioId) from usuariosconfirmados uc where uc.EventoId= @eid", new {eid=id}).FirstOrDefault(); 
+            ViewBag.palestrantes = Construtor.EventoApp().PalestrantesEvento(id);
             return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id,_usuario.ID));
         }
         public ActionResult EventosUsuario()
@@ -47,16 +50,14 @@ namespace GuiaPalestra.Controllers
             Construtor.EventoApp().InscreverPalestraEvento(id, eventoId,_usuario.ID,status,trilhaId,salaId);
             return RedirectToAction("PalestrasEvento/"+_eventoId,"Usuario");
         }
-
         public ActionResult ConfirmarPresenca(string id,string palestraId)
         {
             Construtor.EventoApp().ConfirmarParticipacaoUsuario(id, palestraId, _usuario.ID);
             return RedirectToAction("MinhasPalestras/" + _eventoId, "Usuario");
         }
-
-        public ActionResult RelatorioDePalestras()
+        public ActionResult RelatorioDePalestras(string id)
         {
-            return View();
+            return View(Construtor.EventoApp().RelatorioPalestras(id, _usuario.ID));
         }
 
   

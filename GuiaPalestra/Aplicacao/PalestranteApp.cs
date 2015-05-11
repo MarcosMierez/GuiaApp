@@ -43,7 +43,7 @@ namespace GuiaPalestrasOnline.Aplicacao
         public Usuario LogarPalestrante(string email, string senha)
         {
             var tempPalestrante=contexto.SqlBd.Query<dynamic>(
-                "select nomepalestrante as Nome,Id,emailPalestrante,Foto as Email,Permissao from palestrante where emailPalestrante = @Email and Senha = @Senha",
+                "select nomepalestrante as Nome,Id,emailPalestrante as Email,Foto,Permissao from palestrante where emailPalestrante = @Email and Senha = @Senha",
                 new {Email = email, Senha = senha}).FirstOrDefault();
             if (tempPalestrante == null)
             return new Usuario();

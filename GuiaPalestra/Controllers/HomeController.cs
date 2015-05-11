@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using GuiaPalestrasOnline.Aplicacao;
-using GuiaPalestrasOnline.Helpers;
-using GuiaPalestrasOnline.Models;
-using GuiaPalestrasOnline.Repositorio;
 
-namespace GuiaPalestrasOnline.Controllers
+namespace GuiaPalestra.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+      [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            return View(Construtor.EventoApp().EventosDisponiveis("Usuario"));
         }
 
     }

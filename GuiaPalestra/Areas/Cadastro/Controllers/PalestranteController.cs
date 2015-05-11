@@ -44,9 +44,9 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
             return View(Construtor.PalestranteApp().Details(Id));
         }
 
-        public ActionResult Editar(string id)
+        public ActionResult Editar()
         {
-            var palestranteVM = ConvertVM(Construtor.PalestranteApp().Details(id));
+            var palestranteVM = ConvertVM(Construtor.PalestranteApp().Details(_usuario.ID));
             return View(palestranteVM);
         }
         [HttpPost]

@@ -10,5 +10,6 @@ namespace GuiaPalestra.Models
         public List<string> Permissao { get; set; }
         public string Senha { get; set; }
         public string Foto { get; set; }
+        public char Sexo { get; set; }
     }
 }

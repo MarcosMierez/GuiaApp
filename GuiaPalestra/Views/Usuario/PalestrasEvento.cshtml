@@ -1,72 +1,119 @@
 ﻿@using System.Diagnostics
+@using GuiaPalestra.ViewModel
 @model IEnumerable<GuiaPalestra.ViewModel.PalestraViewModel>
 
-
-<h2>Palestras desse Evento</h2>
-
-<table class="table table-bordered ">
-    <tr class="success">
-        <th>
-            Titulo
-        </th>
-        <th>
-            Palestrante
-        </th>
-
-        <th>
-            Duração
-        </th>
-        <th>
-            Trilha
-        </th>
-        <th>
-            Sala
-        </th>
-        <th>
-            Vagas
-        </th>
-        <th>Inscrever</th>
-    </tr>
-
-    @foreach (var item in Model)
+@{
+    if (!Model.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-                @Html.Hidden(item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomePalestrante)
-            </td>
-            <td>
-                @item.HorarioInicial.ToString("HH:mm") <strong> as </strong>@item.HorarioFinal.ToString("HH:mm")
-            </td>
-            <td>
-                @item.NomeTrilha
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroSala)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vagas)
-            </td>
-            <td>
-                @{
-        if (item.Vagas <= 0)
-        {
-            <p>não há vagas</p>
-        }
-        else
-        {
-            <a class="glyphicon glyphicon-check" href="@Url.Action("Inscrever","Usuario",new{id=item.Id,eventoId=item.EventoId,status=true,trilhaID=item.TrilhaId,salaId=item.SalaId})"></a>
-        }
+        <div class="card" style="padding: 10px">
+            <div class="row">
+                <img src="~/Content/confira-as-palestras-do-centro-espirita-fe-e-caridade.jpg" class="responsive-img" />
+                <div class="col s12 m12">
+                    <div class="card purple darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Evento Indisponível</span>
+                            <p>
+                                Este evento pode não ter nenhuma palestra registrada ou está indisponível temporariamente
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="@Url.Action("EventosDisponiveis","Usuario")">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    }
+    else
+    {
+        <h2 class="headers">Palestrantes</h2>
+        <div class="row">
+            @foreach (var palestrante in (List<PalestranteVM>)ViewBag.palestrantes)
+            {
+                <div class="col m4">
+                    <div class="center-align">
+                        <div class=" card" style="padding-top: 10px">
+                            <img src="~/Content/Uploads/Palestrante/@palestrante.PhotoPath" class="circle" width="100" height="100" />
+                            <p>@palestrante.Nome</p>
+                            <p>@palestrante.Email</p>
+                            <div class="right-align">
+                                <a href="@Url.Action("")" class="btn-floating btn-large waves-effect waves-light orange"><i class="mdi-action-perm-identity"></i></a>
+                                <a href="@Url.Action("")" class="btn-floating btn-large waves-effect waves-light blue"><i class="mdi-image-dehaze"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div style="clear: both"></div>
+        <h2 class="headers">Palestras desse Evento</h2>
+        <div class="right-align">
+            <a class="btn-floating btn-large waves-effect waves-light red "><i class="mdi-action-lock"></i></a>
+            <span>Não há vagas para esta palestra</span>
+            <br />
+            <a class="btn-floating btn-large waves-effect waves-light green "><i class="mdi-action-done"></i></a>
+            <span>Palestra disponivel para inscrição</span>
+        </div>
+        
+        <div class="card" style="padding: 10px">
+            <table class="bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Titulo
+                        </th>
+                        <th>
+                            Duração
+                        </th>
+                        <th>
+                            Sala
+                        </th>
+                        <th>
+                            Vagas
+                        </th>
+                        <th>Inscrever</th>
+                    </tr>
+                </thead>
+
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                        @Html.Hidden(item.Id)
+                    </td>
+                    <td>
+                        @item.HorarioInicial.ToString("HH:mm") <strong> as </strong>@item.HorarioFinal.ToString("HH:mm")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroSala)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vagas)
+                    </td>
+                    <td>
+
+                        @if (item.Vagas <= 0)
+                            {
+                            <p class="btn-floating btn-large waves-effect waves-light red " disabled=""><i class="mdi-action-lock"></i></p>
+
+                            }
+                            else
+                            {
+                            <a href="@Url.Action("Inscrever", "Usuario", new {id = item.Id, eventoId = item.EventoId, status = true, trilhaID = item.TrilhaId, salaId = item.SalaId})" class="btn-floating btn-large waves-effect waves-light green"><i class="mdi-action-done"></i></a>
+                            }
+                    </td>
+
+                </tr>
                 }
 
+            </table>
+            <p class="right-align"><a href="#">@ViewBag.contador pessoas confirmadas nesse evento</a></p>
+        </div>
 
-
-            </td>
-
-        </tr>
     }
-
-</table>
+}

@@ -20,8 +20,8 @@
             <th>
                 @if (@item.Pendencia != "confirmada")
                 {
-                    <a class="glyphicon glyphicon-ok " href="@Url.Action("AceitarPalestra","Coordenador",new{id=item.PalestraId,eventoId=item.EventoId,resposta="aceita"})"></a>
-                    <a class="glyphicon glyphicon-remove" href="@Url.Action("AceitarPalestra", "Coordenador", new { id = item.PalestraId, eventoId = item.EventoId, resposta = "recusada" })"></a>
+                    <a class="mdi-av-my-library-add large" href="@Url.Action("AceitarPalestra","Coordenador",new{id=item.PalestraId,eventoId=item.EventoId,resposta="aceita"})"></a>
+                    <a class="mdi-action-highlight-remove large" href="@Url.Action("AceitarPalestra", "Coordenador", new { id = item.PalestraId, eventoId = item.EventoId, resposta = "recusada" })"></a>
                 }
             </th>
         </tr>

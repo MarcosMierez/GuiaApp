@@ -1,0 +1,15 @@
+﻿
+.nav-wrapper,#ft {
+    background-color: #5665aa;
+    padding-left: 10px;
+}
+h2 {
+    font-family: 'Segoe UI';
+}
+.headers {
+    font-size: 20px;
+}
+#contentEnvento li  {
+    text-transform: uppercase;
+    color: #4953ba;
+}
