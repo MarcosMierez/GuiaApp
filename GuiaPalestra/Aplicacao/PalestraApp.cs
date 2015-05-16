@@ -59,11 +59,19 @@ namespace GuiaPalestrasOnline.Aplicacao
                     ppId = idPalestrante
                 });
         }
-        public void RemoverPalestraDoPalestrante(string idPalestra, string idPalestrante)
+        public void RemoverPalestraDoPalestrante(string idPalestra, string idPalestrante,string eventoId)
         {
-            contexto.SqlBd.Query("delete from palestra where Id = @pId and PalestranteId = @ppId",
+            contexto.SqlBd.Query("delete from palestrasolicitada where PalestraId = @pId and PalestranteId = @ppId and EventoId = @eid ",
+                new { pId = idPalestra, ppId = idPalestrante,eid=eventoId });
+        }
+        public void DeletarPalestraDoPalestrante(string idPalestra, string idPalestrante)
+        {
+            contexto.SqlBd.Query("delete from palestra where Id = @pId and PalestranteId = @ppId ",
+                new { pId = idPalestra, ppId = idPalestrante});
+            contexto.SqlBd.Query("delete from palestrasolicitada where PalestraId = @pId and PalestranteId = @ppId ",
                 new { pId = idPalestra, ppId = idPalestrante });
         }
+
 
         public void DisponibilizarPalestra(string palestraId,string palestranteId,string eventoId,string trilhaId,string pendencia,string coordenadorId)
         {

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using GuiaPalestra.Models;
 using GuiaPalestra.ViewModel;
 using GuiaPalestrasOnline.Aplicacao;
 using GuiaPalestrasOnline.Helpers;
-using GuiaPalestrasOnline.Models;
 
-namespace GuiaPalestrasOnline.Controllers
+namespace GuiaPalestra.Controllers
 {
     [Authorize(Roles ="Palestrante")]
     public class EventoController : Controller

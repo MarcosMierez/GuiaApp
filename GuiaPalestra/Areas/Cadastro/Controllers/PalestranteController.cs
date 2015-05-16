@@ -18,12 +18,6 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
             _usuario = Seguranca.Usuario();
         }
 
-        public ActionResult Index()
-        {
-
-            return View(Construtor.PalestranteApp().GetAll());
-        }
-
         public ActionResult Cadastrar()
         {
             return View(new Palestrante());
@@ -39,15 +33,14 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
             return View(entidade);
 
         }
-        public ActionResult Detalhe(string Id)
+        public ActionResult Detalhe()
         {
-            return View(Construtor.PalestranteApp().Details(Id));
+            return View(ConvertVM(Construtor.PalestranteApp().Details(_usuario.ID)));
         }
 
         public ActionResult Editar()
         {
-            var palestranteVM = ConvertVM(Construtor.PalestranteApp().Details(_usuario.ID));
-            return View(palestranteVM);
+            return View(ConvertVM(Construtor.PalestranteApp().Details(_usuario.ID)));
         }
         [HttpPost]
         public ActionResult Editar(PalestranteVM entidade)
@@ -63,7 +56,7 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
                 }
                 
                 Construtor.PalestranteApp().Edit(palestranteModel);
-                return RedirectToAction("Index");
+                return RedirectToAction("Detalhe","Palestrante");
             }
             return View(entidade);
 

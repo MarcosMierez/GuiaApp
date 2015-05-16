@@ -7,12 +7,13 @@
         <script type="text/javascript">
             $(function () {
                 var $flash = $('<div id="flash" class="alert  fade in" style="display:none;">');
-                $flash.html('<button data-dismiss="alert" class="close close-sm" type="button"><i class="glyphicon glyphicon-remove"></i></button>' + '<p style="text-align:center">@flash.Message</p>');
+                $flash.html('<i class="mdi-action-highlight-remove small"></i>' + '<p style="text-align:center">@flash.Message</p>');
                 $flash.toggleClass('flash');
                 $flash.toggleClass('@flash.ClassName');
                 $('#msg').prepend($flash);
-                $flash.slideDown('slow');               
+                $flash.slideDown('slow');
                 $flash.click(function () { $(this).slideToggle('highlight'); });
+          
             });
         </script>
     }

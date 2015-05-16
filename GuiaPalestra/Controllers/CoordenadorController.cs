@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web.Mvc;
@@ -112,7 +113,7 @@ namespace GuiaPalestra.Controllers
             var palestra = Construtor.EventoApp().DetalhePalestra(id, Seguranca.Usuario().ID, EventoId);
             var salas = Construtor.SalaApp().MinhasSalas(EventoId);
             ViewBag.salas = new SelectList(salas, "ID", "NumeroSala",palestra.SalaId);
-            ViewBag.datas = new SelectList(GetDatas(), "data", "data", palestra.Dia);
+            ViewBag.datas = GetDatas();
             return View(palestra);
         }
         [HttpPost]
@@ -157,6 +158,8 @@ namespace GuiaPalestra.Controllers
 
         public struct Datas
         {
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
             public DateTime data { get; set; }
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace GuiaPalestra.ViewModel
 {

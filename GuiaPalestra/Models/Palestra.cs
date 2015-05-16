@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using GuiaPalestrasOnline.Models;
 
 namespace GuiaPalestra.Models
@@ -11,8 +12,10 @@ namespace GuiaPalestra.Models
             Trilha=new Trilha();
             Palestrante=new Palestrante();
         }
+        [Required]
         public string Titulo { get; set; }
-        public DateTime Duracao { get; set; }
+        [Required]
+        public string Duracao { get; set; }
         public string PalestranteId { get; set; }
         public string TrilhaId { get; set; }
         public string SalaId { get; set; }

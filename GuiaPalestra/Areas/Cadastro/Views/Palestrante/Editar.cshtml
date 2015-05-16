@@ -1,41 +1,37 @@
 ﻿@model GuiaPalestra.ViewModel.PalestranteVM
 
-<h2>Editar</h2>
-
-@Html.ValidationSummary(true)
-<form action="" method="POST" enctype="multipart/form-data">
-
-    <div class="form-horizontal">
-        <h4>Palestrante</h4>
-        <hr />
-
+<h2 class="headers">Alterar Dados</h2>
+<div class="card-panel grey lighten-5 z-depth-1">
+    <form class="col s12" method="POST" action="" enctype="multipart/form-data">
         @Html.HiddenFor(model => model.ID)
-        <img src="~/Content/Uploads/Palestrante/@Model.PhotoPath" alt="" class="img-rounded" height="150" width="150"/>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        <div class="center-align">
+            <div class="col s2">
+                <img src="~/Content/Uploads/Palestrante/@Model.PhotoPath" class="circle" alt="" width="100" height="100" />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TwitterPalestrante, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TwitterPalestrante, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TwitterPalestrante, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="mdi-action-perm-contact-cal prefix"></i>
+                <input type="text" value="@Model.Nome" id="Nome" name="Nome">
+                <label>Nome</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="mdi-communication-email prefix"></i>
+                <input type="text" class="validate" value="@Model.Email" id="Email" name="Email">
+                <label>Email</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="mdi-action-perm-identity prefix"></i>
+                <input type="text" class="validate" value="@Model.TwitterPalestrante" id="TwitterPalestrante" name="TwitterPalestrante">
+                <label>Twitter</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="file" name="Photo" id="Photo" />
             </div>
         </div>
-        
-        <input type="file" id="Photo" name="Photo" value="@Model.Photo"/>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Editar" class="btn btn-info" />
-            </div>
-        </div>
-    </div>
-</form>
-
-<div>
-    @Html.ActionLink("Voltar", "Index")
+        <p class="right-align">
+            <button class="waves-effect waves-light btn green">Editar</button>
+        </p>
+    </form>
 </div>

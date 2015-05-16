@@ -1,26 +1,28 @@
 ﻿@model IEnumerable<GuiaPalestra.ViewModel.PalestraSolicitadaViewModel>
 
-<h2>Palestras Submetidas</h2>
+<div class="card" style="padding: 10px;height: 500px">
+<h2 class="headers">Palestras Submetidas</h2>
 
-<table class="table">
-    <tr>
-        <th>Titulo</th>
-        <th>Pendencia</th>
-        <th></th>
-        <th></th>
-    </tr>
-
+<table>
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Pendencia</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
             <th>@item.Titulo</th>
             <th>@item.Pendencia</th>
-            <th><a class="mdi-action-highlight-remove medium"></a></th>
+            <th><a href="@Url.Action("RemoverPalestra", "PalestrantePainel",new{id=@item.PalestraId,eventoId=@item.EventoId})"><i class="mdi-action-highlight-remove small"></i></a></th>
             @if (@item.Pendencia == "aceita")
             {
-                <th><a href="@Url.Action("ConfirmarPalestra", "PalestrantePainel", new {eventoId = @item.EventoId, palestraId = @item.PalestraId, coordenadorId = @item.CoordenadorId,resposta = "confirmada",trilhaId=@item.TrilhaId})">Confirmar Palestra</a></th>
+                <th><a href="@Url.Action("ConfirmarPalestra", "PalestrantePainel", new {eventoId = @item.EventoId, palestraId = @item.PalestraId, coordenadorId = @item.CoordenadorId, resposta = "confirmada", trilhaId = @item.TrilhaId})">Confirmar Palestra</a></th>
             }
         </tr>
     }
 </table>
-
+</div>

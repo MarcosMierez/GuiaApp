@@ -1,23 +1,35 @@
 ﻿@model IEnumerable<GuiaPalestra.Models.Palestra>
-@{
-    ViewBag.Title = "MinhasPalestras";
-}
-<table class="table">
-    <tr>
-        <th>Titulo</th>
-        <th>Duracao</th>
-    </tr>
+<div class="card" style="padding: 10px; height: 500px">
+    @{
+        if (!Model.Any())
+        {
+            <p>Você ainda nao cadastrou nenhuma palestra</p><a href="~/PalestrantePainel/CriarPalestras" class="waves-effect waves-light btn green" style="color:#eee7e7">Adicionar Palestra</a>
+        }
+        else
+        {
+            <table>
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Duracao</th>
+                </tr>
+                </thead>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <th>@item.Titulo</th>
-            <th>@item.Duracao.ToString("HH:mm")</th>
-            <th>
-                <a href="@Url.Action("DisponibilizarPalestra", "PalestrantePainel", new {id = @item.ID})">@item.Status</a>
-                <a href="@Url.Action("RemoverPalestra", "PalestrantePainel", new {id = @item.ID})" class="glyphicon glyphicon-remove"></a>
-                
-            </th>
-        </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.Titulo</th>
+                        <th>@item.Duracao - Minutos</th>
+                        <th><a href="@Url.Action("DeletarPalestra", "PalestrantePainel", new {id = @item.ID})"><i class="mdi-action-highlight-remove small"></i></a></th>
+
+                    </tr>
+                }
+            </table>
+        }
     }
-</table>
+    <br/>
+    <div class="right-align">
+        <a href="~/PalestrantePainel/Index"><i class="mdi-navigation-arrow-back small circle grey"></i></a>
+    </div>
+</div>

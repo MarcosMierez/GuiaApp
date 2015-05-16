@@ -1,9 +1,25 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<p>Olá @User.Identity.Name</p>
 
-<h2>Index</h2>
-<a href="@Url.Action("CriarPalestras","PalestrantePainel")">Criar Palestra</a>
-<a href="@Url.Action("MinhasPalestras","PalestrantePainel")">Minhas Palestras</a>
-<a href="@Url.Action("PalestrasRequisitadas","PalestrantePainel")">Palestras Submetidas</a>
+<div class="row">
+    <div class="col m12">
+        <div class="">
+            <ul class="collection" style="padding: 10px;">
+                <li class="collection-item avatar"><i class="mdi-av-playlist-add  green  small circle"></i><a href="@Url.Action("CriarPalestras", "PalestrantePainel")"> Criar Palestra</a></li>
+                <li class="collection-item avatar"><i class="mdi-notification-event-note  blue  small circle"></i><a href="@Url.Action("Index", "Evento")"> Eventos</a></li>
+                <li class="collection-item"><i class="mdi-action-toc orange small circle"></i><a href="@Url.Action("MinhasPalestras","PalestrantePainel")"> Minhas Palestras</a></li>
+                <li class="collection-item"><i class="mdi-action-view-headline pink small circle"></i><a href="@Url.Action("PalestrasRequisitadas", "PalestrantePainel")"> Palestras Submetidas</a></li>
+                <li class="collection-item"><i class="mdi-action-settings grey small circle"></i><a href="~/Cadastro/Palestrante/Detalhe"> Dados Cadastrais</a></li>
+                <li class="collection-item">
+                    <div class="right-align">
+                        <a href="@Url.Action("Sair", "Acesso")" class="waves-effect waves-light grey btn">Deslogar</a>
+                        
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    
+</div>
+
+

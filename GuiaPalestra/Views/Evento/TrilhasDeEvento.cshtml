@@ -1,9 +1,16 @@
 ﻿@model IEnumerable<GuiaPalestrasOnline.Models.Trilha>
-<h2>Trilhas De Evento</h2>
+<h2 class="headers">Trilhas De Evento</h2>
 
-@foreach (var trilhas in Model)
-{
-    <a href="@Url.Action("SubmeterPalestras","Evento",new{id=trilhas.ID})">@trilhas.NomeTrilha</a><br>
-}
+<div class="collection">
 
+    @foreach (var trilhas in Model)
+    {
 
+        <a href="@Url.Action("SubmeterPalestras", "Evento", new {id = @trilhas.ID})" class="collection-item">@trilhas.NomeTrilha</a>
+
+    }
+
+</div>
+<div style="clear: both">
+    
+</div>

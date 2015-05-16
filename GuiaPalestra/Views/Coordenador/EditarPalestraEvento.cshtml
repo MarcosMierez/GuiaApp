@@ -1,10 +1,11 @@
-﻿@using GuiaPalestra.Models
+﻿@using GuiaPalestra.Controllers
+@using GuiaPalestra.Models
 @model GuiaPalestra.ViewModel.PalestraSolicitadaViewModel
 <h2>Organizar Palestra</h2>
 <div class="row">
     <form class="col s12" method="POST" action="">
         <div class="card" style="padding: 30px">
-            @Html.HiddenFor(model=>model.PalestraId)
+            @Html.HiddenFor(model => model.PalestraId)
             @Html.HiddenFor(model => model.EventoId)
             <div class="row">
                 <div class="input-field col s12">
@@ -32,9 +33,20 @@
             </div>
             <label>Datas Diponiveis</label>
             <div class="row">
-                <div class="input-field col s12">
-                    @Html.DropDownList("Dia", (SelectList)ViewBag.datas, new { @class = "browser-default" })
-                </div>
+                <select name="Dia" id="Dia">
+                    @foreach (var item in (List<CoordenadorController.Datas>)ViewBag.datas)
+                    {
+                        if (item.data == Model.Dia)
+                        {
+                            <option value="@item.data" selected="">@item.data.ToString("dd/YY/yyyy")</option>
+                        }
+                        else
+                        {
+                            <option value="@item.data">@item.data.ToString("dd/YY/yyyy")</option>
+
+                        }
+                    }
+                </select>
             </div>
             <div class="row">
                 <div class="input-field col s12">

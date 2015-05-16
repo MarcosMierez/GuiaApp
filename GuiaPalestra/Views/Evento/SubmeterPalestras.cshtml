@@ -1,21 +1,44 @@
 ﻿@model IEnumerable<GuiaPalestra.Models.Palestra>
 @{
-    ViewBag.Title = "Submeter Palestras";
-}
-<table class="table">
-    <tr>
-        <th>Titulo</th>
-        <th>Duracao</th>
-    </tr>
-
-    @foreach (var item in Model)
+    if (!Model.Any())
     {
-        <tr>
-            <th>@item.Titulo</th>
-            <th>@item.Duracao.ToString("HH:mm")</th>
-            <th>
-                <a href="@Url.Action("DisponibilizarPalestra", "Evento", new {id = @item.ID})">DisponibilizarPalestra</a>
-            </th>
-        </tr>
+        <p>Você ainda nao cadastrou nenhuma palestra</p>
+        <a href="~/PalestrantePainel/CriarPalestras" class="waves-effect waves-light btn green" style="color: #eee7e7">Adicionar Palestra</a>
     }
-</table>
+    else
+    {
+
+        <div class="card" style="padding: 10px">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        Titulo
+                    </th>
+                    <th>
+                        Duração
+                    </th>
+                    <th>Submeter Palestra</th>
+                </tr>
+                </thead>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @item.Duracao - Minutos
+                        </td>
+                        <td class="center-align">
+                            <a href="@Url.Action("DisponibilizarPalestra", "Evento", new {id = @item.ID})"><i class="mdi-content-add small circle" style="background: green"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    }
+}

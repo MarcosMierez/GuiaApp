@@ -1,14 +1,35 @@
 ﻿@model IEnumerable<GuiaPalestra.Models.Evento>
-<h2>Eventos Disponiveis</h2>
 
-<strong>Eventos</strong>
-@foreach (var eventos  in Model)
-{
-    <p><a href="@Url.Action("TrilhasdeEvento","Evento",new{eventoId=@eventos.ID,coordenadorId=@eventos.CoordenadorId})">@eventos.Tema</a></p>
-    <p>@eventos.DiaInicial</p>
-    <p>@eventos.DiaFinal</p>
-    <p>@eventos.Local</p>
-}
+
+<h2 class="headers">Eventos Disponiveis</h2>
+<div class="row">
+    @foreach (var evento in Model)
+    {
+
+        <div class="col m4">
+            <div class="card small">
+                <div class="card-content">
+                    <ul id="contentEnvento">
+                        <li>@evento.Tema</li>
+                        <li>
+                            <br />
+                        </li>
+                        <li>Local : @evento.Local</li>
+                        <li>Dia Inicial : @evento.DiaInicial.ToString("dd/MM/yyyy") </li>
+                        <li>Dia Final : @evento.DiaFinal.ToString("dd/MM/yyyy") </li>
+                    </ul>
+                </div><br />
+                <div class="right-align">
+                    <a href="@Url.Action("TrilhasDeEvento", "Evento", new { eventoId = @evento.ID,coordenadorId=@evento.CoordenadorId })" class="btn-floating btn-large waves-effect waves-light green"><i class="mdi-content-add"></i></a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div style="clear:both"></div>
+
 
 
 

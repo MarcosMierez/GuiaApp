@@ -41,6 +41,7 @@ namespace GuiaPalestra.Controllers
                 if (!string.IsNullOrEmpty(usuario.Email))
                 {
                     Seguranca.GerearSessaoDeUsuario(usuario);
+                    this.Flash("Bem vindo " + usuario.Nome);
                     return RedirectToAction("Index", "PalestrantePainel");
                 }    
             }
@@ -56,9 +57,11 @@ namespace GuiaPalestra.Controllers
         {
             if (Construtor.CoordenadorApp().LoginCoordenador(emailCoordenador, senhaCoordenador)==true)
             {
+                this.Flash("Bem vindo " );
                 return RedirectToAction("Index", "Coordenador");
             }
-            return View();
+            this.Flash("Login ou Senha Incorretos", LoggerEnum.Error);
+            return RedirectToAction("LoginCoordenador","Acesso");
         }
 
         public ActionResult Sair()

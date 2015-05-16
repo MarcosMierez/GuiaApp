@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
@@ -24,14 +26,38 @@ namespace GuiaPalestra.Controllers
 
         public ActionResult CriarPalestras()
         {
+            var listaHorarios = new List<Horarios>()
+            {
+                new Horarios
+                {
+                    horarioInicial = Convert.ToDateTime("00:30:00")
+                },
+                new Horarios
+                {
+                    horarioInicial = Convert.ToDateTime("01:00:00")
+                },
+                new Horarios
+                {
+                    horarioInicial = Convert.ToDateTime("01:30:00")
+                }
+            };
+
+
+            ViewBag.horarios = new SelectList(listaHorarios, "horarioInicial", "horarioInicial");
             return View(new Palestra());
         }
         [HttpPost]
         public ActionResult CriarPalestras(Palestra entidade)
         {
-            entidade.PalestranteId = _usuario.ID;
-            Construtor.PalestraApp().Save(entidade);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                entidade.PalestranteId = _usuario.ID;
+                Construtor.PalestraApp().Save(entidade);
+                this.Flash("Palestra registrada com sucesso", LoggerEnum.Error);
+                return RedirectToAction("Index");
+            }
+            this.Flash("Preencha todos os campos", LoggerEnum.Error);
+            return View(entidade);
         }
 
         public ActionResult MinhasPalestras()
@@ -51,12 +77,17 @@ namespace GuiaPalestra.Controllers
             return RedirectToAction("MinhasPalestras");
         }
 
-        public ActionResult RemoverPalestra(string id)
+        public ActionResult RemoverPalestra(string id, string eventoId)
         {
-            Construtor.PalestraApp().RemoverPalestraDoPalestrante(id, _usuario.ID);
-            return RedirectToAction("MinhasPalestras");
+            Construtor.PalestraApp().RemoverPalestraDoPalestrante(id, _usuario.ID, eventoId);
+            return RedirectToAction("PalestrasSubmetidas/" + eventoId, "PalestrantePainel");
         }
 
+        public ActionResult DeletarPalestra(string id)
+        {
+            Construtor.PalestraApp().DeletarPalestraDoPalestrante(id, _usuario.ID);
+            return RedirectToAction("MinhasPalestras", "PalestrantePainel");
+        }
         public ActionResult PalestrasRequisitadas()
         {
             return View(Construtor.EventoApp().EventosSolicidados(_usuario.ID));
@@ -73,6 +104,9 @@ namespace GuiaPalestra.Controllers
             Construtor.EventoApp().ConfirmarParticipacao(palestraId, eventoId, resposta, coordenadorId, trilhaId, _usuario.ID);
             return RedirectToAction("PalestrasSubmetidas/" + _eventoId);
         }
-
+        public class Horarios
+        {
+            public DateTime horarioInicial { get; set; }
+        }
     }
 }

@@ -1,38 +1,45 @@
 ﻿@model IEnumerable<GuiaPalestra.Models.Evento>
 
-<h2>Eventos que Submeti Palestras</h2>
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tema)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Local)
-        </th>
-        <th>
-            Dias
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="card" style="padding: 10px;height: 500px">
+    <h2 class="headers">Eventos que submeti palestras</h2>
+    <table class="centered">
+        <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tema)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Local)
-            </td>
-            <td>
-                @item.DiaInicial.ToString("dd/MM/yyy") <strong>até</strong> @item.DiaFinal.ToString("dd/MM/yyy")
-            </td>
-            <td>
-                <a href="@Url.Action("PalestrasSubmetidas","PalestrantePainel",new{id=@item.ID})">Palestras Submetidas</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Tema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Local)
+            </th>
+            <th>
+                Dias
+            </th>
+            <th></th>
         </tr>
-    }
+        </thead>
 
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tema)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Local)
+                </td>
+                <td>
+                    @item.DiaInicial.ToString("dd/MM/yyy") <strong>até</strong> @item.DiaFinal.ToString("dd/MM/yyy")
+                </td>
+                <td>
+                    <a href="@Url.Action("PalestrasSubmetidas", "PalestrantePainel", new {id = @item.ID})">Palestras Submetidas</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="right-align">
+        <a href="~/PalestrantePainel/Index"><i class="mdi-navigation-arrow-back small circle grey"></i></a>
+    </div>
+</div>
+

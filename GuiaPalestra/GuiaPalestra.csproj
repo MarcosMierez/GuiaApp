@@ -276,7 +276,6 @@
     <Content Include="Areas\Cadastro\Views\Palestrante\Cadastrar.cshtml" />
     <Content Include="Areas\Cadastro\Views\Palestrante\Detalhe.cshtml" />
     <Content Include="Areas\Cadastro\Views\Palestrante\Editar.cshtml" />
-    <Content Include="Areas\Cadastro\Views\Palestrante\Index.cshtml" />
     <Content Include="Areas\Cadastro\Views\Palestra\Detalhe.cshtml" />
     <Content Include="Areas\Cadastro\Views\Palestra\Editar.cshtml" />
     <Content Include="Areas\Cadastro\Views\Palestra\Index.cshtml" />

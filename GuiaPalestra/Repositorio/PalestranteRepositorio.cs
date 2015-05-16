@@ -27,8 +27,8 @@ namespace GuiaPalestrasOnline.Repositorio
 
         public void Update(Palestrante entidade)
         {
-            context.SqlBd.Query("update palestrante set NomePalestrante = @nome,TwitterPalestrante = @twitter,Foto = @photo where Id =@id",
-                new {nome = entidade.Nome, twitter = entidade.TwitterPalestrante,photo=entidade.Foto,id=entidade.ID});
+            context.SqlBd.Query("update palestrante set NomePalestrante = @nome,EmailPalestrante = @email ,TwitterPalestrante = @twitter,Foto = @photo where Id =@id",
+                new {nome = entidade.Nome,email=entidade.Email, twitter = entidade.TwitterPalestrante,photo=entidade.Foto,id=entidade.ID});
         }
 
         public void Delete(string Id)
@@ -38,7 +38,7 @@ namespace GuiaPalestrasOnline.Repositorio
 
         public Palestrante GetByID(string Id)
         {
-        return context.SqlBd.Query<Palestrante>("select Id,NomePalestrante as Nome,TwitterPalestrante,Foto from palestrante where Id = @ID", new {ID = Id}).FirstOrDefault();
+        return context.SqlBd.Query<Palestrante>("select Id,NomePalestrante as Nome,TwitterPalestrante,EmailPalestrante Email,Foto from palestrante where Id = @ID", new {ID = Id}).FirstOrDefault();
             
         }
 
