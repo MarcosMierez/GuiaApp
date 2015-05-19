@@ -1,4 +1,13 @@
-﻿<h2>Painel Coordenador</h2>
-<a href="@Url.Action("CriarEvento","Coordenador")">Criar Evento</a><br />
-<a href="@Url.Action("MeusEventos", "Coordenador")">Meus Eventos</a><br />
-<a href="@Url.Action("CriarTrilha", "Coordenador")">Criar Trilha</a>
+﻿<p>Painel Administrativo</p>
+
+<div class="row" >
+            <ul class=" collection" style="padding: 10px;background-color: #808080" id="cID">
+                <li class="collection-item avatar"><i class="mdi-av-my-library-add  blue  small circle"></i><a href="@Url.Action("CriarEvento", "Coordenador")"> Cadastrar Evento</a></li>
+                <li class="collection-item"><i class="mdi-action-toc orange small circle"></i><a href="@Url.Action("MeusEventos", "Coordenador")"> Meus Eventos</a></li>
+                <li class="collection-item"><i class="mdi-action-settings grey small circle"></i><a href="~/Cadastro/UsuarioM/Detalhes"> Dados Cadastrais</a></li>
+            </ul>
+            <div class="right-align">
+                <a href="@Url.Action("Sair","Acesso")" class="waves-effect waves-light grey btn">Deslogar</a>
+            </div>
+</div>
+

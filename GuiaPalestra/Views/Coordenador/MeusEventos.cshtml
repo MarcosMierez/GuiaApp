@@ -1,18 +1,27 @@
 ﻿@model List<GuiaPalestra.Models.Evento>
-<h2>MeusEventos</h2>
+<h2 class="headers">Meus Eventos</h2>
+<div class="row" >
 
-@foreach (var eventos in Model)
-{
-    <div>
-        <fieldset>
-            <p>Titulo - @eventos.Tema</p>
-            <p>Local - @eventos.Local</p>
-            <p>Dia - @eventos.DiaInicial.ToString("dd/MM/yyyy")</p>
-            <p>Dia - @eventos.DiaFinal.ToString("dd/MM/yyyy")</p>
-            <a href="@Url.Action("ListarPalestrasDesseEvento", "Coordenador", new {Id = @eventos.ID})">Palestras desse evento</a>
-            <a href="@Url.Action("GerenciarEvento", "Coordenador", new {id= @eventos.ID })">Gerenciar Evento</a>
-        </fieldset>
-    </div>
-    
-}
 
+    @foreach (var eventos in Model)
+    {
+        <div class="col m6">
+            <div class="card small" style="padding: 10px">
+                <div class="collection">
+                    <ul>
+                        <li class="collection-item">@eventos.Tema</li>
+                        <li class="collection-item ">@eventos.Local</li>
+                        <li class="collection-item">@eventos.DiaInicial.ToString("dd/MM/yyyy") <strong>até o dia</strong> @eventos.DiaFinal.ToString("dd/MM/yyyy")</li>
+                    </ul>
+                </div>
+                <div class="center-align">
+                    <a href="@Url.Action("ListarPalestrasDesseEvento", "Coordenador", new {Id = @eventos.ID})" class="waves-effect waves-light btn purple darken-4">Palestras</a>
+                    <a href="@Url.Action("GerenciarEvento", "Coordenador", new {id = @eventos.ID})" class="waves-effect waves-light btn indigo darken-3">Gerenciar</a>
+                </div>
+            </div>
+
+        </div>
+
+    }
+
+</div>

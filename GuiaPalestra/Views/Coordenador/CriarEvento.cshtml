@@ -1,54 +1,36 @@
-﻿@using GuiaPalestrasOnline.Models
+﻿
 @model GuiaPalestra.Models.Evento
-
-@{
-    ViewBag.Title = "CriarEvento";
-}
-
-<h2>CriarEvento</h2>
-
-@using (Html.BeginForm())
-{
-
-    <div class="form-horizontal">
-        <h4>Evento</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Local, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Local, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Local, "", new {@class = "text-danger"})
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tema, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tema, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tema, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DiaInicial, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DiaInicial, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DiaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DiaFinal, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div style="padding-top: 10px">
+    <h2 class="headers">Registrar Evento</h2>
+    <div class="card-panel grey lighten-5 z-depth-1">
+        <div class="row">
+            <form class="col s12" action="" method="POST">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="DiaInicial" type="text" class="validate" name="DiaInicial">
+                        <label for="DiaInicial">Dia Inicial</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="DiaFinal" type="text" class="validate" name="DiaFinal">
+                        <label for="DiaFinal">Dia Final</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Tema" type="text" class="validate" name="Tema">
+                        <label for="Tema">Tema</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Local" type="text" class="validate" name="Local">
+                        <label for="Local">Local</label>
+                    </div>
+                </div>
+                <div class="right-align">
+                    <button type="submit" class="waves-effect waves-light btn">Registrar</button>
+                </div>                
+            </form>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

@@ -26,7 +26,7 @@ namespace GuiaPalestra.Controllers
         public ActionResult CriarEvento()
         {
 
-            return View();
+            return View(new Evento());
         }
         [HttpPost]
         public ActionResult CriarEvento(Evento entidade)

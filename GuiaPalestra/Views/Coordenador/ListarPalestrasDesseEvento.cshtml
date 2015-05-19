@@ -1,22 +1,27 @@
-﻿
-@model IEnumerable<GuiaPalestrasOnline.Models.Trilha>
-<fieldset>
+﻿@model IEnumerable<GuiaPalestrasOnline.Models.Trilha>
+<h2 class="headers">Trilhas desse evento</h2>
+@{
+    if (!Model.Any())
+    {
+        <div class="card" style="height: 100px;padding: 10px">
+            <p>Não há trilhas para este eventos <a href="@Url.Action("CriarTrilha", "Coordenador")">  Criar nova trilha</a>
+            </p>
+        </div>
+    }
+    else
+    {
 
-    <table class="table">
-        <tr>
-            <th>Trilhas</th>
-        </tr>
+        <div class="card">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li><a href="@Url.Action("PalestrasParaEssaTrilha", "Coordenador", new {id = @item.ID})">@item.NomeTrilha</a></li>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <th><a href="@Url.Action("PalestrasParaEssaTrilha", "Coordenador", new {id = @item.ID})">@item.NomeTrilha</a></th>
-            </tr>
-
-        }
-    </table>
-    <a href="@Url.Action("CriarTrilha", "Coordenador")">Nova Trilha</a>
-    <a href="@Url.Action("CriarSala","Coordenador")">Nova Sala</a>
-
-</fieldset>
-
+                }
+            </ul>
+        </div>
+    }
+}
+<a class=" btn waves-effect waves-light lighten-4" href="@Url.Action("CriarTrilha", "Coordenador")">Nova Trilha</a>
+<a class=" btn waves-effect waves-light purple lighten-2" href="@Url.Action("CriarSala", "Coordenador")">Nova Sala</a>
+   

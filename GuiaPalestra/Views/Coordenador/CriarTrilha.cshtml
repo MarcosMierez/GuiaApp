@@ -1,35 +1,25 @@
-﻿@using GuiaPalestrasOnline.Aplicacao
-@using GuiaPalestrasOnline.Models
+﻿
 @model GuiaPalestrasOnline.Models.Trilha
 
-@{
-    ViewBag.Title = "CriarTrilha";
-}
-
-<h2>CriarTrilha</h2>
-
-@using (Html.BeginForm())
-{
 
 
-    <div class="form-horizontal">
-        <h4>Trilha</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NomeTrilha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NomeTrilha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NomeTrilha, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<h2 class="headers">Registrar Trilha</h2>
+<form action="" method="post" class="col s12">
+    <div class="card" style="padding: 10px">
+        <div class=" row">
+        <div class="input-field col s12">
+            <input type="text" name="NomeTrilha" id="NomeTrilha" class="activator" />
+            <label for="NomeTrilha">Nome da Trilha</label>
         </div>
     </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="right-align">
+                    <button class="btn waves-effect waves-light light-bg" type="submit">Registrar</button>
+                </div>
+
+            </div>
+        </div>    
+    </div>
+
+</form>
