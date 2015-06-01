@@ -105,11 +105,12 @@ namespace GuiaPalestra.Aplicacao
 
         public IEnumerable<PalestraSolicitadaViewModel> PalestrasRegistradas(string eventoId, string coordenadorId)
         {
-            return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal from " +
-                                                                     "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp " +
+            return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal,e.Status from " +
+                                                                     "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp,Evento e  " +
                                                                      "where p.Id = pe.PalestraId " +
                                                                      "and t.Id = pe.TrilhaId " +
                                                                      "and p.PalestranteId = pp.Id " +
+                                                                     "and pe.EventoId = e.Id " +
                                                                      "and pe.EventoId = @eId and pe.CoordenadorId = @cId",
                                                                      new { eId = eventoId, cId = coordenadorId }).ToList();
         }

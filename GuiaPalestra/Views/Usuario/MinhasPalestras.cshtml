@@ -27,7 +27,7 @@
     else
     {
 
-        <h2>Palestras desse Evento</h2>
+        <h2 class="headers">Palestras desse Evento</h2>
 
         <table class="bordered ">
             <thead>
@@ -67,11 +67,11 @@
                         @{
                             if (item.Status.Equals(true))
                             {
-                                <a href="@Url.Action("ConfirmarPresenca", "Usuario", new {id = item.EventoId, palestraId = item.Id})" class="btn-floating btn-large waves-effect waves-light orange"><i class="mdi-action-done"></i></a>
+                                <a href="@Url.Action("ConfirmarPresenca", "Usuario", new {id = item.EventoId, palestraId = item.Id})"><i class="mdi-action-done orange lighten-4 circle small"></i></a>
                             }
                             else
                             {
-                                <a class="btn-floating btn-large waves-effect waves-light green"><i class="mdi-action-done-all"></i></a>
+                                <a><i class="mdi-action-done-all small"></i></a>
                             }
 
                         }

@@ -41,8 +41,8 @@
         {
             <ul id="drop" class="dropdown-content">
                 <li class="center-align" style="padding-top: 5px"><img src="~/Content/Uploads/Coordenador/@Seguranca.Usuario().Foto" class="circle small" width="50" height="50" /></li>
-                <li><a href="@Url.Action("EventosUsuario", "Usuario")">Meus Eventos</a></li>
-                <li><a href="~/Cadastro/Palestrante/Editar">Dados Pessoais</a></li>
+                <li><a href="@Url.Action("MeusEventos", "Coordenador")">Meus Eventos</a></li>
+                <li><a href="~/Cadastro/Coordenador/Editar">Dados Pessoais</a></li>
                 <li><a href="~/Acesso/Sair">Sair</a></li>
             </ul>
         }
@@ -81,8 +81,7 @@
                         if (User.IsInRole("coordenador"))
                         {
                             <li><a href="~/Coordenador/Index">Home</a></li>
-                            <li><a href="">Meus Eventos</a></li>
-                            <li><a href="">Minhas Palestras</a></li>
+                            <li><a href="~/Coordenador/MeusEventos">Meus Eventos</a></li>
                         }
 
 

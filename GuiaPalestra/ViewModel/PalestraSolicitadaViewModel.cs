@@ -23,5 +23,6 @@ namespace GuiaPalestra.ViewModel
         public DateTime HoraFinal { get; set; }
         public int Vagas { get; set; }
         public DateTime Dia { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -99,12 +99,12 @@
 
                         @if (item.Vagas <= 0)
                             {
-                            <p class="btn-floating btn-large waves-effect waves-light red " disabled=""><i class="mdi-action-lock"></i></p>
+                            <p disabled=""><i class="mdi-action-lock circle red"></i></p>
 
                             }
                             else
                             {
-                            <a href="@Url.Action("Inscrever", "Usuario", new {id = item.Id, eventoId = item.EventoId, status = true, trilhaID = item.TrilhaId, salaId = item.SalaId})" class="btn-floating btn-large waves-effect waves-light green"><i class="mdi-action-done"></i></a>
+                            <a href="@Url.Action("Inscrever", "Usuario", new {id = item.Id, eventoId = item.EventoId, status = true, trilhaID = item.TrilhaId, salaId = item.SalaId})"><i class="mdi-action-done green circle lighten small"></i></a>
                             }
                     </td>
 

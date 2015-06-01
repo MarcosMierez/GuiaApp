@@ -1,29 +1,46 @@
 ﻿@model IEnumerable<GuiaPalestra.ViewModel.PalestraSolicitadaViewModel>
 
-<h2>@ViewBag.nomeTrilha</h2>
-
-<table class="table">
-    <tr>
-        <th>Titulo</th>
-        <th>Palestrante</th>
-        <th>Email</th>
-        <th>Status</th>
-    </tr>
-
-    @foreach (var item in Model)
+<h2 class="headers">@ViewBag.nomeTrilha</h2>
+@{
+    if (!Model.Any())
     {
-        <tr>
-            <th>@item.Titulo</th>
-            <th>@item.Nome</th>
-            <th>@item.Email</th>
-            <th>@item.Pendencia</th>
-            <th>
-                @if (@item.Pendencia != "confirmada")
-                {
-                    <a class="mdi-av-my-library-add large" href="@Url.Action("AceitarPalestra","Coordenador",new{id=item.PalestraId,eventoId=item.EventoId,resposta="aceita"})"></a>
-                    <a class="mdi-action-highlight-remove large" href="@Url.Action("AceitarPalestra", "Coordenador", new { id = item.PalestraId, eventoId = item.EventoId, resposta = "recusada" })"></a>
-                }
-            </th>
-        </tr>
+        <p>Não existem palestras solicitadas para esta trilha</p>
     }
-</table>
+    else
+    {
+        <fieldset>
+            <table class="bordered">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Palestrante</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.Titulo</th>
+                        <th>@item.Nome</th>
+                        <th>@item.Email</th>
+                        <th>@item.Pendencia</th>
+                        <th>
+                            @if (@item.Pendencia != "confirmada")
+                            {
+                                <a href="@Url.Action("AceitarPalestra", "Coordenador", new {id = item.PalestraId, eventoId = item.EventoId, resposta = "aceita"})"><i class="mdi-content-add small green lighten-3 circle"></i></a>
+                                <a href="@Url.Action("AceitarPalestra", "Coordenador", new {id = item.PalestraId, eventoId = item.EventoId, resposta = "recusada"})"><i class="mdi-content-clear small red lighten-3 circle"></i></a>
+                            }
+                        </th>
+                    </tr>
+                }
+            </table>
+        </fieldset>
+    }
+}
+    <hr/>
+        <div class="right-align">
+            <a class="btn-floating waves-effect waves-light grey" href="~/Coordenador/ListarPalestrasDesseEvento/@ViewBag.eventoID"><i class="mdi-content-reply"></i></a>
+        </div>

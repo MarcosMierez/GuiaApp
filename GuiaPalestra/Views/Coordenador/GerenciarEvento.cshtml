@@ -1,83 +1,79 @@
 ﻿@model IEnumerable<GuiaPalestra.ViewModel.PalestraSolicitadaViewModel>
 
-@{
-    ViewBag.Title = "GerenciarEvento";
-}
-
-<h2>GerenciarEvento</h2>
+<h2 class="headers">Gerenciar Evento</h2>
 
 <input type="hidden" value="@ViewBag.eventId" id="palestraId" />
-<table class="table">
-    <tr id="123">
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeTrilha)
-        </th>
-        <th>
-            Inicio
-        </th>
-        <th>
-            Fim
-        </th>
-        <th>
-            Ações
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
+@{
+    if (!Model.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeTrilha)
-            </td>
-            <td>
-                @item.HoraInicial.ToString("HH:mm")
-            </td>
-            <td>
-                @item.HoraFinal.ToString("HH:mm")
-            </td>
-            <td>
-                <a href="@Url.Action("EditarPalestraEvento", "Coordenador", new {id = @item.PalestraId})" class="btn btn-success">Organizar</a>
-            </td>
-           
-
-
-        </tr>
-
+        <p>Não ha palestras confirmadas ainda </p>
     }
+    else
+    {
+        <table class="bordered">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    Trilha
+                </th>
+                <th>
+                    Inicio
+                </th>
+                <th>
+                    Fim
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+            </thead>
 
-</table>
-<script src="~/Scripts/jquery-2.1.3.js"></script>
-<a class="btn btn-warning" id="publicarEvento">Publicar Evento</a>
-<a class="btn btn-info" href="@Url.Action("GerarRelatorioEvento","Coordenador",new{id=@ViewBag.eventId})">Usuarios Confirmados</a>
-<script>
-    $("#publicarEvento").click(function() {
-        var resposta = document.getElementById("palestraId").value;
-        PublicEvent(resposta);
-    });
 
-    function PublicEvent(resposta) {
-        $.ajax({
-            url: '@Url.Action("PublicarEvento", "Coordenador")',
-            type: 'post',
-            data: { variavel: resposta }
-        });
-    };
-</script>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeTrilha)
+                    </td>
+                    <td>
+                        @item.HoraInicial.ToString("HH:mm")
+                    </td>
+                    <td>
+                        @item.HoraFinal.ToString("HH:mm")
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditarPalestraEvento", "Coordenador", new {id = @item.PalestraId})"><i class="mdi-content-create blue lighten-5 circle small"></i></a>
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    <hr/>
+        <div class="right-align">
+            @if (Model.FirstOrDefault().Status == "Usuario")
+            {
+                <a class="btn waves-effect waves-light orange lighten-3" href="@Url.Action("GerarRelatorioEvento", "Coordenador", new {id = @ViewBag.eventId})">Lista de Ouvintes</a>
+
+            }
+            else
+            {
+                <a class="btn waves-effect waves-light green lighten-3" href="@Url.Action("PublicarEvento","Coordenador",new{id=@Model.FirstOrDefault().EventoId})">Publicar</a>
+
+            }
+        </div>
+        
+    }
+}

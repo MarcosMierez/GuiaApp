@@ -1,26 +1,39 @@
 ﻿@model IEnumerable<GuiaPalestra.ViewModel.UsuariosConfirmadosVM>
-<h2>Lista de Ouvintes </h2>
-<div class="panel panel-success">
-   
-    <div class="panel-heading">@Model.First().Titulo</div>
-    <div class="panel-body">
-        <p>@Model.Count() ouvintes confirmados</p>
-    </div>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Nome</th>
-            <th colspan="2">Email</th>
-        </tr>
-        
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td><img src="~/Content/Uploads/Usuario/@item.Foto" alt="@item.NomeUsuario" class="img-circle" width="30" height="30"/></td>
-                    <td>@item.NomeUsuario</td>
-                    <td>@item.EmailUsuario</td>
-                </tr>
-            }
-            
-</table>
-</div>
+<h2 class="headers">Lista de Ouvintes </h2>
+@{
+    if (!Model.Any())
+    {
+        <p>Ainda não há ouvintes confirmados</p>
+    }
+    else
+    {
+        <div class="panel panel-success">
+
+            <div class="panel-heading">@Model.First().Titulo</div>
+            <div class="panel-body">
+                <p>@Model.Count() ouvintes confirmados</p>
+            </div>
+            <table class="bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th colspan="2">Email</th>
+                    </tr>
+                </thead>
+              
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="~/Content/Uploads/Usuario/@item.Foto" alt="@item.NomeUsuario" class="circle" width="30" height="30"/></td>
+                        <td>@item.NomeUsuario</td>
+                        <td>@item.EmailUsuario</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    }
+}
+<a href="~/Coordenador/Index"><p>Voltar</p><i class="mdi-navigation-arrow-back  small"></i></a>

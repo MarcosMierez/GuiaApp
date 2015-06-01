@@ -1,35 +1,44 @@
 ﻿@model IEnumerable<GuiaPalestra.ViewModel.UsuariosConfirmadosVM>
 <h2 class="headers">Relatorio para este evento</h2>
-<div class="card" style="padding: 10px">
+@{
+    if (!Model.Any())
+    {
+        <p>Você nao esta participando de nenhuma palestra nesse evento</p>
+    }
+    else
+    {
 
-    <a class="">@Model.First().Tema</a>
-    <table class="bordered">
-        <thead>
-        <tr>
+        <div class="card" style="padding: 10px">
 
-            <th>Titulo</th>
-            <th>Horario Inicial</th>
-            <th>Horario Final</th>
-            <th>Sala</th>
-            <th>Descrição</th>
-        </tr>
-        </thead>
+            <a class="">@Model.First().Tema</a>
+            <table class="bordered">
+                <thead>
+                <tr>
 
-        <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Titulo</td>
-                <td>@item.HorarioInicial.ToString("HH:mm")</td>
-                <td>@item.HorarioFinal.ToString("HH:mm")</td>
-                <td>@item.Sala</td>
-                <td>@item.Descricao</td>
-            </tr>
-        }
-        </tbody>
-    </table><br />
-    <a class="btn-floating btn-large waves-effect waves-light orange" href="@Url.Action("EventosUsuario","Usuario")"><i class="mdi-hardware-keyboard-backspace"></i></a>
-</div>
+                    <th>Titulo</th>
+                    <th>Horario Inicial</th>
+                    <th>Horario Final</th>
+                    <th>Sala</th>
+                    <th>Descrição</th>
+                </tr>
+                </thead>
 
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Titulo</td>
+                        <td>@item.HorarioInicial.ToString("HH:mm")</td>
+                        <td>@item.HorarioFinal.ToString("HH:mm")</td>
+                        <td>@item.Sala</td>
+                        <td>@item.Descricao</td>
+                    </tr>
+                }
+                </tbody>
+            </table><br/>
+            <a class="btn-floating btn-large waves-effect waves-light orange" href="@Url.Action("EventosUsuario", "Usuario")"><i class="mdi-hardware-keyboard-backspace"></i></a>
+        </div>
+    }
+}
 
 

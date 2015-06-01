@@ -48,12 +48,13 @@ namespace GuiaPalestra.Controllers
         public ActionResult ListarPalestrasDesseEvento(string ID)
         {
             EventoId = ID;
-            return View(Construtor.TrilhaApp().MinhasTrilhas(Seguranca.Usuario().ID, ID));
+            return View(Construtor.TrilhaApp().MinhasTrilhas(Seguranca.Usuario().ID, EventoId));
         }
 
         public ActionResult PalestrasParaEssaTrilha(string id)
         {
             TrilhaId = id;
+            ViewBag.eventoID = EventoId;
             ViewBag.nomeTrilha = new Contexto().SqlBd.Query<string>("select NomeTrilha from Trilha where Id = @trilhaId",
                 new { trilhaId = id }).FirstOrDefault();
             var list = Construtor.EventoApp().ListarPalestraDesseEvento(id, Seguranca.Usuario().ID);
@@ -126,10 +127,10 @@ namespace GuiaPalestra.Controllers
             return RedirectToAction("GerenciarEvento/" + EventoId);
         }
 
-        public JsonResult PublicarEvento(string variavel)
+        public ActionResult PublicarEvento(string id)
         {
-            new Contexto().SqlBd.Query("update evento set Status = 'Usuario' where Id = @eId",new{eId=variavel});
-            return Json("");
+            new Contexto().SqlBd.Query("update evento set Status = 'Usuario' where Id = @eId",new{eId=id});
+            return RedirectToAction("GerenciarEvento/" + id, "Coordenador");
         }
 
         public IEnumerable<Datas> GetDatas()

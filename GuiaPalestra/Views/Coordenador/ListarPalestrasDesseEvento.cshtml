@@ -11,7 +11,7 @@
     else
     {
 
-        <div class="card">
+        <div class="card" style="padding-left: 10px">
             <ul>
                 @foreach (var item in Model)
                 {
@@ -22,6 +22,9 @@
         </div>
     }
 }
-<a class=" btn waves-effect waves-light lighten-4" href="@Url.Action("CriarTrilha", "Coordenador")">Nova Trilha</a>
-<a class=" btn waves-effect waves-light purple lighten-2" href="@Url.Action("CriarSala", "Coordenador")">Nova Sala</a>
+<div class="right-align">
+    <a class=" btn waves-effect waves-light lighten-4" href="@Url.Action("CriarTrilha", "Coordenador")">Nova Trilha</a>
+    <a class=" btn waves-effect waves-light purple lighten-2" href="@Url.Action("CriarSala", "Coordenador")">Nova Sala</a>
+</div>
+
    
