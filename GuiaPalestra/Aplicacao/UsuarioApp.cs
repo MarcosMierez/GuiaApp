@@ -13,7 +13,7 @@ namespace GuiaPalestrasOnline.Aplicacao
     {
         private readonly ICrud<Usuario> repositorio;
         private readonly IUser User=new UsuarioRepositorio();
-        private readonly Contexto contexto;
+ 
         public UsuarioApp(ICrud<Usuario>repo)
         {          
             repositorio = repo;

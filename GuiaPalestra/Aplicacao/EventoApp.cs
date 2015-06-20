@@ -327,7 +327,7 @@ namespace GuiaPalestra.Aplicacao
                                                              uid = usuarioId
                                                          });
                 int vagas = contexto.SqlBd.Query<int>("select p.Vagas from palestraevento p where EventoId= @eid and PalestraId= @pid",new{eid=eventoId,pid=palestraId}).FirstOrDefault();
-                if (vagas!=null || vagas>=1)
+                if (vagas>=1)
                 {
                     contexto.SqlBd.Query("update palestraevento set Vagas = @vaga where Eventoid= @eid and PalestraId = @pid" , new {vaga = (vagas-1),eid=eventoId,pid=palestraId});
                     contexto.SqlBd.Query("update palestrausuario set Status = '0' where EventoId= @eid and PalestraId = @pid and UsuarioId= @uid",new{eid=eventoId,pid=palestraId,uid=usuarioId});

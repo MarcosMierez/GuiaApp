@@ -164,14 +164,6 @@
     <Content Include="Content\js\materialize.min.js" />
     <Content Include="Content\oRokM.jpg" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\Uploads\Coordenador\87fa0d5e-c3cf-4d8f-aacb-ae4c4c9a8743.jpg" />
-    <Content Include="Content\Uploads\Coordenador\8a8849e1-d9f0-43e9-b955-33bd1a478fcc.jpg" />
-    <Content Include="Content\Uploads\Palestrante\8a8849e1-d9f0-43e9-b955-33bd1a478fcc.jpg" />
-    <Content Include="Content\Uploads\palestra-688-sug.jpg" />
-    <Content Include="Content\Uploads\Usuario\443286d9-adf0-4b35-b9fb-4506b82074ea.jpg" />
-    <Content Include="Content\Uploads\Usuario\d7d792fd-c58f-4fd1-94a5-c5fc26854494.jpg" />
-    <Content Include="Content\Uploads\Usuario\e2ba674a-a853-48bf-a7db-3775bc936c2c.jpg" />
-    <Content Include="Content\Uploads\Usuario\f81de981-e4a5-44f9-a865-9fa28727288c.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Icon.png" />
