@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Dapper;
@@ -25,7 +26,7 @@ namespace GuiaPalestra.Controllers
         }
         public ActionResult EventosDisponiveis()
         {
-            return View(Construtor.EventoApp().EventosDisponiveis(_usuario.Permissao[0]));
+            return View(Construtor.EventoApp().EventosDisponiveis(_usuario.Permissao[0]).ToList());
         }
         public ActionResult PalestrasEvento(string id)
         {
