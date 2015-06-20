@@ -317,7 +317,7 @@
     <Content Include="Views\Usuario\EventosUsuario.cshtml" />
     <Content Include="Views\Usuario\RelatorioDePalestras.cshtml" />
     <Content Include="Views\Coordenador\GerarRelatorioEvento.cshtml" />
-    <Content Include="Views\Shared\Erro.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
