@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Dapper;
 using GuiaPalestra.Models;
 using GuiaPalestrasOnline.Aplicacao;
-using GuiaPalestrasOnline.Models;
+using GuiaPalestrasOnline.Repositorio;
 
-namespace GuiaPalestrasOnline.Repositorio
+namespace GuiaPalestra.Repositorio
 {
     public class CoordenadorRepositorio:ICrud<Coordenador>
     {

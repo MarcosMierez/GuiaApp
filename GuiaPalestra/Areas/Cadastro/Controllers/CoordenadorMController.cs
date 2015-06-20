@@ -36,9 +36,9 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
             return View(entidade);
         }
 
-        public ActionResult Editar(string id)
+        public ActionResult Editar()
         {
-            return View(ConvertVM(Construtor.CoordenadorApp().GetById(id)));
+            return View(ConvertVM(Construtor.CoordenadorApp().GetById(_usuario.ID)));
         }
         [HttpPost]
         public ActionResult Editar(CoordenadorVM entidade)
@@ -54,9 +54,18 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
                 }
 
                 Construtor.CoordenadorApp().Update(coordenadorModel);
-                return RedirectToAction("Index");
+                return RedirectToAction("Detalhe","CoordenadorM");
             }
             return View(entidade);
+        }
+
+        public ActionResult Detalhe()
+        {
+            return View(ConvertVM(Construtor.CoordenadorApp().GetById(_usuario.ID)));
+        }
+        public ActionResult PerfilCoordenador(string id)
+        {
+            return View(ConvertVM(Construtor.CoordenadorApp().GetById(id)));
         }
         private CoordenadorVM ConvertVM(Coordenador coordenador)
         {

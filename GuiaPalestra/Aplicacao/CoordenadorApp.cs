@@ -48,7 +48,7 @@ namespace GuiaPalestrasOnline.Aplicacao
             }
             return false;
         }
-
+        
         public IEnumerable<Coordenador> GetAll()
         {
            return _repositorio.GetAll();

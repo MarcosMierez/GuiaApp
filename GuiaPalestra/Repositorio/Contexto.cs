@@ -15,6 +15,6 @@ namespace GuiaPalestrasOnline.Repositorio
         {
             SqlBd.Open();
         }
-        public  MySqlConnection SqlBd = new MySqlConnection("Database=palestrasonline;Data Source=localhost;User Id=root; Password=root");
+        public  MySqlConnection SqlBd = new MySqlConnection("Database=palestrasonline;Data Source=localhost;User Id=root; Password=root") ?? ;
     }
 }

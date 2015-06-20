@@ -35,7 +35,7 @@ namespace GuiaPalestra.Aplicacao
         }
         public IEnumerable<Evento> EventosDisponiveis(string permissao)
         {
-            return contexto.SqlBd.Query<Evento>("select e.Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal,c.Nome NomeCoordenador from evento e,coordenador c where e.Status = @role and c.Id = e.CoordenadorId", new { role = permissao }).ToList();
+            return contexto.SqlBd.Query<Evento>("select e.Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal,c.Nome NomeCoordenador,c.Id CoordenadorId from evento e,coordenador c where e.Status = @role and c.Id = e.CoordenadorId", new { role = permissao }).ToList();
         }
         public List<Evento> MeusEventos(string coordenadorId)
         {

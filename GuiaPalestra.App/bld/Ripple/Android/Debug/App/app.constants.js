@@ -2,7 +2,7 @@
     'use strict';
     var urls = {
         dashboard: 'inicio',
-        api: 'http://localhost:6131/Api/'
+        api: 'http://localhost:6131/Api/UsuarioApi'
     };
 
     var config = {
