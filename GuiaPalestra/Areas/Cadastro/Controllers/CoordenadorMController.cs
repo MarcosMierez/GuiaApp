@@ -18,7 +18,7 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
         }
         public ActionResult Index()
         {
-            return View(Construtor.CoordenadorApp().GetAll());
+            return View();
         }
 
         public ActionResult Cadastrar()
