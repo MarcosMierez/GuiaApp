@@ -55,7 +55,7 @@ namespace GuiaPalestra.Controllers
         {
             TrilhaId = id;
             ViewBag.eventoID = EventoId;
-            ViewBag.nomeTrilha = new Contexto().SqlBd.Query<string>("select NomeTrilha from Trilha where Id = @trilhaId",
+            ViewBag.nomeTrilha = new Contexto().SqlBd.Query<string>("select NomeTrilha from trilha where Id = @trilhaId",
                 new { trilhaId = id }).FirstOrDefault();
             var list = Construtor.EventoApp().ListarPalestraDesseEvento(id, Seguranca.Usuario().ID);
             return View(list);
