@@ -28,12 +28,9 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Coordenador entidade)
         {
-            if (ModelState.IsValid)
-            {
-                Construtor.CoordenadorApp().Save(entidade);
-            return  RedirectToAction("Index");
-            }
-            return View(entidade);
+            if (!ModelState.IsValid) return View(entidade);
+            Construtor.CoordenadorApp().Save(entidade);
+            return  RedirectToAction("LoginCoordenador","Acesso",new{Area=""});
         }
 
         public ActionResult Editar()

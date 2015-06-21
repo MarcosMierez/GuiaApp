@@ -35,16 +35,16 @@ namespace GuiaPalestra.Controllers
                 new Contexto().SqlBd.Query<int>(
                     "select count(uc.UsuarioId) from usuariosconfirmados uc where uc.EventoId= @eid", new {eid=id}).FirstOrDefault(); 
             ViewBag.palestrantes = Construtor.EventoApp().PalestrantesEvento(id);
-            return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id,_usuario.ID));
+            return View(Construtor.EventoApp().PalestrasDisponiveisEvento(id,_usuario.ID).ToList());
         }
         public ActionResult EventosUsuario()
         {
-            return View(Construtor.EventoApp().EventosUsuario(_usuario.ID));
+            return View(Construtor.EventoApp().EventosUsuario(_usuario.ID).ToList());
         }
         public ActionResult MinhasPalestras(string id)
         {
             _eventoId = id;
-            return View(Construtor.EventoApp().PalestrasAdicionadas(id,_usuario.ID));
+            return View(Construtor.EventoApp().PalestrasAdicionadas(id,_usuario.ID).ToList());
         }
         public ActionResult Inscrever(string id, string eventoId,bool status,string trilhaId,string salaId)
         {
@@ -58,7 +58,7 @@ namespace GuiaPalestra.Controllers
         }
         public ActionResult RelatorioDePalestras(string id)
         {
-            return View(Construtor.EventoApp().RelatorioPalestras(id, _usuario.ID));
+            return View(Construtor.EventoApp().RelatorioPalestras(id, _usuario.ID).ToList());
         }
 
   

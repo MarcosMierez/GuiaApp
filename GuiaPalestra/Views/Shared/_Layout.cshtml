@@ -22,7 +22,7 @@
         {
             <ul id="drop" class="dropdown-content">
                 <li class="center-align" style="padding-top: 5px"><img src="~/Content/Uploads/Usuario/@Seguranca.Usuario().Foto" class="circle small" width="50" height="50" /></li>
-                <li><a href="@Url.Action("EventosUsuario", "Usuario")">Minhas Inscrições</a></li>
+                <li><a href="@Url.Action("EventosUsuario", "Usuario",new{Area=""})">Minhas Inscrições</a></li>
                 <li><a href="~/Cadastro/UsuarioM/Detalhes">Dados Pessoais</a></li>
                 <li><a href="~/Acesso/Sair">Sair</a></li>
 
@@ -32,7 +32,7 @@
         {
             <ul id="drop" class="dropdown-content">
                 <li class="center-align" style="padding-top: 5px"><img src="~/Content/Uploads/Palestrante/@Seguranca.Usuario().Foto" class="circle small" width="50" height="50" /></li>
-                <li><a href="@Url.Action("MinhasPalestras", "PalestrantePainel")">Minhas Palestras</a></li>
+                <li><a href="@Url.Action("MinhasPalestras", "PalestrantePainel",new{Area=""})">Minhas Palestras</a></li>
                 <li><a href="~/Cadastro/Palestrante/Detalhe">Dados Pessoais</a></li>
                 <li><a href="~/Acesso/Sair">Sair</a></li>
             </ul>
@@ -41,7 +41,7 @@
         {
             <ul id="drop" class="dropdown-content">
                 <li class="center-align" style="padding-top: 5px"><img src="~/Content/Uploads/Coordenador/@Seguranca.Usuario().Foto" class="circle small" width="50" height="50" /></li>
-                <li><a href="@Url.Action("MeusEventos", "Coordenador")">Meus Eventos</a></li>
+                <li><a href="@Url.Action("MeusEventos", "Coordenador", new { Area = "" })">Meus Eventos</a></li>
                 <li><a href="~/Cadastro/CoordenadorM/Detalhe">Dados Pessoais</a></li>
                 <li><a href="~/Acesso/Sair">Sair</a></li>
             </ul>
@@ -49,9 +49,9 @@
         else
         {
             <ul id="loginDropDown" class="dropdown-content">
-                <li><a href="@Url.Action("Index", "Acesso")">Usuario</a></li>
-                <li><a href="@Url.Action("LoginPalestrante", "Acesso")">Palestrante</a></li>
-                <li><a href="@Url.Action("LoginCoordenador","Acesso")">Coordendor</a></li>
+                <li><a href="@Url.Action("Index", "Acesso",new{Area=""})">Usuario</a></li>
+                <li><a href="@Url.Action("LoginPalestrante", "Acesso", new { Area = "" })">Palestrante</a></li>
+                <li><a href="@Url.Action("LoginCoordenador", "Acesso", new { Area = "" })">Coordendor</a></li>
 
             </ul>
 
@@ -68,8 +68,8 @@
                         if (User.IsInRole("Usuario"))
                         {
                             <li><a href="~/Usuario/Index">Home</a></li>
-                            <li><a href="@Url.Action("EventosDisponiveis","Usuario")">Eventos Disponiveis</a></li>
-                            <li><a href="@Url.Action("EventosUsuario", "Usuario")">Minhas Palestras</a></li>
+                            <li><a href="@Url.Action("EventosDisponiveis", "Usuario", new { Area = "" })">Eventos Disponiveis</a></li>
+                            <li><a href="@Url.Action("EventosUsuario", "Usuario", new { Area = "" })">Minhas Palestras</a></li>
 
                         }
                         if (User.IsInRole("Palestrante"))

@@ -26,7 +26,8 @@ namespace GuiaPalestra.Areas.Cadastro.Controllers
             if (ModelState.IsValid)
             {
                Construtor.UsuarioApp().Save(entidade);
-                return RedirectToAction("Index", "Acesso");
+                this.Flash("Registro efetuado com sucesso");
+                return RedirectToAction("Index","Acesso",new{Area=""});
             }
 
             return View(entidade);

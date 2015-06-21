@@ -53,7 +53,7 @@ namespace GuiaPalestra.Controllers
             {
                 entidade.PalestranteId = _usuario.ID;
                 Construtor.PalestraApp().Save(entidade);
-                this.Flash("Palestra registrada com sucesso", LoggerEnum.Error);
+                this.Flash("Palestra registrada com sucesso");
                 return RedirectToAction("Index");
             }
             this.Flash("Preencha todos os campos", LoggerEnum.Error);
