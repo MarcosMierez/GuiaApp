@@ -263,7 +263,7 @@ namespace GuiaPalestra.Aplicacao
         public IEnumerable<Evento> EventosUsuario(string usuarioID)
         {
             return contexto.SqlBd.Query<Evento>(
-                  "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from Evento e ,palestraUsuario pu where e.Id=pu.EventoId and pu.UsuarioId = @uid group by e.Tema",
+                  "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from evento e ,palestrausuario pu where e.Id=pu.EventoId and pu.UsuarioId = @uid group by e.Tema",
                   new
                   {
                       uid = usuarioID

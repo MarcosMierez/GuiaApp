@@ -14,7 +14,7 @@ namespace GuiaPalestra.Controllers
     [Authorize(Roles = "Usuario")]
     public class UsuarioController : Controller
     {
-        private readonly Usuario _usuario;
+        private static Usuario _usuario;
         public static string _eventoId;
         public UsuarioController()
         {
