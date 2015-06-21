@@ -18,7 +18,7 @@ namespace GuiaPalestrasOnline.Repositorio
         }
         public void Save(Trilha entidade)
         {
-            contexto.SqlBd.Query("insert into Trilha(Id,NomeTrilha,CoordenadorId,EventoId) values(@id,@nome,@CiD,@eId)",
+            contexto.SqlBd.Query("insert into trilha(Id,NomeTrilha,CoordenadorId,EventoId) values(@id,@nome,@CiD,@eId)",
                 new {id = entidade.ID, nome = entidade.NomeTrilha,CiD=entidade.CoordenadorId,eiD=entidade.EventoId});
         }
 
