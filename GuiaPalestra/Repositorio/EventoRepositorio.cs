@@ -51,7 +51,7 @@ namespace GuiaPalestrasOnline.Repositorio
 
         public IEnumerable<Evento> GetAll()
         {
-            return contexto.SqlBd.Query<Evento>("select Id,Local,Tema,DiaInicial,DiaFinal,CoordenadorId from Evento").ToList();
+            return contexto.SqlBd.Query<Evento>("select Id,Local,Tema,DiaInicial,DiaFinal,CoordenadorId from evento").ToList();
         }
 
     }
