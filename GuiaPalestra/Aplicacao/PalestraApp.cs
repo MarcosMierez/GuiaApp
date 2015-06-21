@@ -86,7 +86,7 @@ namespace GuiaPalestrasOnline.Aplicacao
         public IEnumerable<PalestraSolicitadaViewModel> PalestrasSubmetidas(string palestranteId,string eventoId)
         {
           return  contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id PalestraId,pp.NomePalestrante Nome,pp.Id PalestranteId,pp.EmailPalestrante Email,ps.Pendencia,t.Id as TrilhaId,t.NomeTrilha NomeTrilha,ps.EventoId EventoId,c.Id CoordenadorId " +
-                                 "from Palestra p,Palestrante pp, PalestraSolicitada ps,trilha t,Coordenador c " +
+                                 "from palestra p,palestrante pp, palestrasolicitada ps,trilha t,coordenador c " +
                                  "where p.Id=ps.PalestraId and " +
                                  "pp.Id=ps.PalestranteId and " +
                                  "t.Id=ps.TrilhaId and " +

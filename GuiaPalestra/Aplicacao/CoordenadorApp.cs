@@ -29,7 +29,7 @@ namespace GuiaPalestrasOnline.Aplicacao
             if (!string.IsNullOrEmpty(emailCoordenador) && !string.IsNullOrEmpty(senhaCoordenador))
             {
                 var coordenador = _contexto.SqlBd.Query<dynamic>(
-                    "select Id,Nome,Email,Permissao,Foto from Coordenador where email= @email and senha = @senha",
+                    "select Id,Nome,Email,Permissao,Foto from coordenador where email= @email and senha = @senha",
                     new { email = emailCoordenador, senha = senhaCoordenador }).FirstOrDefault();
                 if (coordenador != null)
                 {

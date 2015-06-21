@@ -40,7 +40,7 @@ namespace GuiaPalestra.Aplicacao
         public List<Evento> MeusEventos(string coordenadorId)
         {
             var listaDeEventosParaCoordeandor = contexto.SqlBd.Query<Evento>(
-                 "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from Evento e where @CoordenadorId = e.CoordenadorId",
+                 "select e.Id as Id,e.Local,e.Tema,e.DiaInicial,e.DiaFinal from evento e where @CoordenadorId = e.CoordenadorId",
                  new
                  {
                      CoordenadorId = coordenadorId
@@ -50,7 +50,7 @@ namespace GuiaPalestra.Aplicacao
         public IEnumerable<PalestraSolicitadaViewModel> ListarPalestraDesseEvento(string TrilhaId, string CoordenadorId)
         {
             return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id PalestraId,pp.NomePalestrante Nome,pp.Id PalestranteId,pp.EmailPalestrante Email,ps.Pendencia,ps.EventoId  EventoId " +
-                                   "from Palestra p,Palestrante pp, PalestraSolicitada ps,trilha t,Coordenador c " +
+                                   "from palestra p,Palestrante pp, palestraSolicitada ps,trilha t,coordenador c " +
                                    "where p.Id=ps.PalestraId and " +
                                    "pp.Id=ps.PalestranteId and " +
                                    "t.Id=ps.TrilhaId and " +
@@ -106,7 +106,7 @@ namespace GuiaPalestra.Aplicacao
         public IEnumerable<PalestraSolicitadaViewModel> PalestrasRegistradas(string eventoId, string coordenadorId)
         {
             return contexto.SqlBd.Query<PalestraSolicitadaViewModel>("select p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal,e.Status from " +
-                                                                     "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp,Evento e  " +
+                                                                     "palestra p,trilha t,palestraevento pe,palestrante pp,evento e  " +
                                                                      "where p.Id = pe.PalestraId " +
                                                                      "and t.Id = pe.TrilhaId " +
                                                                      "and p.PalestranteId = pp.Id " +
@@ -119,7 +119,7 @@ namespace GuiaPalestra.Aplicacao
         {
             var palestra = contexto.SqlBd.Query<PalestraSolicitadaViewModel>(
                  "select pe.Vagas,pe.Dia, pe.SalaId SalaId,pe.HorarioInicial HoraInicial,pe.HorarioFinal HoraFinal,p.Titulo,p.Id palestraId,pe.EventoId EventoId,t.NomeTrilha,t.Id trilhaId,p.PalestranteId ,pp.NomePalestrante Nome,pp.EmailPalestrante Email from " +
-                 "Palestra p,Trilha t,PalestraEvento pe,Palestrante pp " +
+                 "palestra p,trilha t,palestraevento pe,palestrante pp " +
                  "where p.Id = pe.PalestraId " +
                  "and t.Id = pe.TrilhaId " +
                  "and p.PalestranteId = pp.Id " +
@@ -235,7 +235,7 @@ namespace GuiaPalestra.Aplicacao
 
         public void InscreverPalestraEvento(string palestraId, string eventoId, string usuarioId, bool status, string trilhaId, string salaId)
         {
-            contexto.SqlBd.Query("insert into PalestraUsuario (PalestraId,EventoId,UsuarioId,Status,TrilhaId,SalaId) values (@pid,@eid,@uid,@st,@tid,@sid)",
+            contexto.SqlBd.Query("insert into palestrausuario (PalestraId,EventoId,UsuarioId,Status,TrilhaId,SalaId) values (@pid,@eid,@uid,@st,@tid,@sid)",
                 new
                 {
                     pid = palestraId,
@@ -320,7 +320,7 @@ namespace GuiaPalestra.Aplicacao
             }
             if (validacao == false)
             {
-                contexto.SqlBd.Query("insert into usuariosConfirmados (EventoId,PalestraId,UsuarioId) values(@eid,@pid,@uid)", new
+                contexto.SqlBd.Query("insert into usuariosconfirmados (EventoId,PalestraId,UsuarioId) values(@eid,@pid,@uid)", new
                                                          {
                                                              eid = eventoId,
                                                              pid = palestraId,
