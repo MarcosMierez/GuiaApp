@@ -20,7 +20,7 @@ namespace GuiaPalestrasOnline.Repositorio
         }
         public void Save(Evento entidade)
         {
-            contexto.SqlBd.Query("insert into Evento (Id,DiaInicial,DiaFinal,Local,CoordenadorId,Tema) values(@Id,@DI,@DF,@local,@cId,@tema)",
+            contexto.SqlBd.Query("insert into evento (Id,DiaInicial,DiaFinal,Local,CoordenadorId,Tema) values(@Id,@DI,@DF,@local,@cId,@tema)",
                 new
                 {
                     Id = entidade.ID,
