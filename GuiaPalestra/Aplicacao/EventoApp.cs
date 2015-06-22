@@ -340,7 +340,7 @@ namespace GuiaPalestra.Aplicacao
 
         public IEnumerable<UsuariosConfirmadosVM> RelatorioPalestras(string e,string u)
         {
-            return contexto.SqlBd.Query<UsuariosConfirmadosVM>("select e.Tema,p.Titulo,pe.HorarioInicial,pe.HorarioFinal,s.NumeroSala Sala,S.Descricao from evento e ,palestra p,palestraevento pe,usuariosconfirmados uc,sala s where uc.EventoId=e.Id and uc.PalestraId=p.Id and pe.salaId=s.Id and pe.eventoId=e.Id and pe.PalestraId = p.Id and uc.usuarioId = @uid and uc.EventoId = @eid", new {uid = u ,eid=e}).ToList();
+            return contexto.SqlBd.Query<UsuariosConfirmadosVM>("select e.Tema,p.Titulo,pe.HorarioInicial,pe.HorarioFinal,s.NumeroSala Sala,s.Descricao from evento e ,palestra p,palestraevento pe,usuariosconfirmados uc,sala s where uc.EventoId=e.Id and uc.PalestraId=p.Id and pe.salaId=s.Id and pe.eventoId=e.Id and pe.PalestraId = p.Id and uc.usuarioId = @uid and uc.EventoId = @eid", new {uid = u ,eid=e}).ToList();
 
         }
 
