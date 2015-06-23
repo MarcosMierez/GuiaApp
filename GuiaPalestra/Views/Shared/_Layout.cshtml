@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia App</title>
-   @* <link rel="icon" type="text/css" href="mdi-communication-phone" />*@
+    @* <link rel="icon" type="text/css" href="mdi-communication-phone" />*@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 
 
@@ -22,11 +22,13 @@
         {
             <ul id="drop" class="dropdown-content">
                 <li class="center-align" style="padding-top: 5px"><img src="~/Content/Uploads/Usuario/@Seguranca.Usuario().Foto" class="circle small" width="50" height="50" /></li>
-                <li><a href="@Url.Action("EventosUsuario", "Usuario",new{Area=""})">Minhas Inscrições</a></li>
+                <li><a href="@Url.Action("EventosUsuario", "Usuario", new {Area = ""})">Minhas Inscrições</a></li>
                 <li><a href="~/Cadastro/UsuarioM/Detalhes">Dados Pessoais</a></li>
                 <li><a href="~/Acesso/Sair">Sair</a></li>
 
-            </ul>      
+            </ul>
+            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+
         }
         else if (User.IsInRole("Palestrante"))
         {
@@ -49,27 +51,26 @@
         else
         {
             <ul id="loginDropDown" class="dropdown-content">
-                <li><a href="@Url.Action("Index", "Acesso",new{Area=""})">Usuario</a></li>
-                <li><a href="@Url.Action("LoginPalestrante", "Acesso", new { Area = "" })">Palestrante</a></li>
-                <li><a href="@Url.Action("LoginCoordenador", "Acesso", new { Area = "" })">Coordendor</a></li>
-
+                <li><a href="@Url.Action("Index", "Acesso", new {Area = ""})">Usuario</a></li>
+                <li><a href="@Url.Action("LoginPalestrante", "Acesso", new {Area = ""})">Palestrante</a></li>
+                <li><a href="@Url.Action("LoginCoordenador", "Acesso", new {Area = ""})">Coordendor</a></li>
             </ul>
 
         }
 
     }
     <div class="navbar-fixed">
-        <nav>
+        <nav role="navigation">
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">Guia App</a>
-                <ul class="right hide-on-med-and-down">
+                <ul id="nav-mobile" class="side-nav">
 
                     @{
                         if (User.IsInRole("Usuario"))
                         {
                             <li><a href="~/Usuario/Index">Home</a></li>
-                            <li><a href="@Url.Action("EventosDisponiveis", "Usuario", new { Area = "" })">Eventos Disponiveis</a></li>
-                            <li><a href="@Url.Action("EventosUsuario", "Usuario", new { Area = "" })">Minhas Palestras</a></li>
+                            <li><a href="@Url.Action("EventosDisponiveis", "Usuario", new {Area = ""})">Eventos Disponiveis</a></li>
+                            <li><a href="@Url.Action("EventosUsuario", "Usuario", new {Area = ""})">Minhas Palestras</a></li>
 
                         }
                         if (User.IsInRole("Palestrante"))
@@ -94,43 +95,44 @@
 
                     }
                 </ul>
+                <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
             </div>
         </nav>
     </div>
 
 
-<div class="container" id="ctP" style="clear: both">
-    @Html.Partial("Logger")
-    @RenderBody()
-</div>
-<div style="padding-top: 250px">
-    <footer class="page-footer" id="ft">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Guia App</h5>
-                    <p class="grey-text text-lighten-4">Sistema de gerenciamento de eventos online</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
+    <div class="container" id="ctP" style="clear: both">
+        @Html.Partial("Logger")
+        @RenderBody()
+    </div>
+    <div style="padding-top: 250px">
+        <footer class="page-footer" id="ft">
             <div class="container">
-                © 2014  V 1.0
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Guia App</h5>
+                        <p class="grey-text text-lighten-4">Sistema de gerenciamento de eventos online</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </footer>
-</div>
-  
-    
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2014  V 1.0
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
 </body>
 </html>
