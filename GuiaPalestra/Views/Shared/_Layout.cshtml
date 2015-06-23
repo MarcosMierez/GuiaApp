@@ -27,7 +27,6 @@
                 <li><a href="~/Acesso/Sair">Sair</a></li>
 
             </ul>
-            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
 
         }
         else if (User.IsInRole("Palestrante"))
@@ -99,8 +98,6 @@
             </div>
         </nav>
     </div>
-
-
     <div class="container" id="ctP" style="clear: both">
         @Html.Partial("Logger")
         @RenderBody()
