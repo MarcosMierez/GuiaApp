@@ -90,3 +90,5 @@ C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\bin\System.Web.We
 C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\obj\Debug\GuiaPalestra.csprojResolveAssemblyReference.cache
 C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\obj\Debug\GuiaPalestra.dll
 C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\obj\Debug\GuiaPalestra.pdb
+C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\bin\System.Web.Http.Cors.dll
+C:\Users\Marcos Vinicius\Desktop\Tcc\GuiaPalestra\GuiaPalestra\bin\System.Web.Http.Cors.xml
