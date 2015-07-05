@@ -20,11 +20,12 @@ namespace GuiaPalestra
             var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             json.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
 
+           // WebApiConfig.Register(GlobalConfiguration.Configuration);
 
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);           
         }
     }
 }
