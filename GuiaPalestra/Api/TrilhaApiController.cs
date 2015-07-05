@@ -17,9 +17,9 @@ namespace GuiaPalestra.Api
     
     public class TrilhaApiController : ApiController
     {
-        public IEnumerable<Trilha> Get(string coordenadorId,string eventoId)
+        public string Get()
         {
-          return Construtor.TrilhaApp().MinhasTrilhas(coordenadorId,eventoId);   
+            return "Lista de trilhas";
         }
 
         public HttpResponseMessage Post(Trilha trilha)
