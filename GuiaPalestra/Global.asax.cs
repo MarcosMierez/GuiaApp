@@ -23,9 +23,9 @@ namespace GuiaPalestra
            // WebApiConfig.Register(GlobalConfiguration.Configuration);
 
             // Code that runs on application startup
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);           
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);         
         }
     }
 }
