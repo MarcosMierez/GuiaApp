@@ -15,5 +15,6 @@ namespace GuiaPalestra.Models
         public DateTime DiaFinal { get; set; }
         public string CoordenadorId { get; set; }
         public string NomeCoordenador { get; set; }
+        public string PalestraId { get; set; }
     }
 }

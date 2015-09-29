@@ -4,6 +4,6 @@
     <ReferenceCachePath>C:\Users\Marcos Vinicius\AppData\Local\Temp\GuiaPalestra.App_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <DebuggerFlavor>RippleNexusS</DebuggerFlavor>
+    <DebuggerFlavor>AndroidDevice</DebuggerFlavor>
   </PropertyGroup>
 </Project>

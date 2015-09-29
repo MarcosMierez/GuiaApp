@@ -2,7 +2,7 @@
     'use strict';
     var urls = {
         dashboard: 'inicio',
-        api: 'http://localhost:6131/Api/UsuarioApi'
+        api: 'http://testeapi-2.apphb.com/Api/NoticiaApi'
     };
 
     var config = {

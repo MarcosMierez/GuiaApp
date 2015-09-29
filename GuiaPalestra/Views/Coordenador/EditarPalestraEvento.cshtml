@@ -33,20 +33,23 @@
             </div>
             <label>Datas Diponiveis</label>
             <div class="row">
-                <select name="Dia" id="Dia">
-                    @foreach (var item in (List<CoordenadorController.Datas>)ViewBag.datas)
-                    {
-                        if (item.data == Model.Dia)
+                <div class="input-field col s12">
+                    <select name="Dia" id="Dia" class="browser-default">
+                        @foreach (var item in (List<CoordenadorController.Datas>)ViewBag.datas)
                         {
-                            <option value="@item.data" selected="">@item.data.ToString("dd/YY/yyyy")</option>
-                        }
-                        else
-                        {
-                            <option value="@item.data">@item.data.ToString("dd/YY/yyyy")</option>
+                            if (item.data == Model.Dia)
+                            {
+                                <option value="@item.data" selected="">@item.data.ToString("dd/MM/yyyy")</option>
+                            }
+                            else
+                            {
+                                <option value="@item.data">@item.data.ToString("dd/MM/yyyy")</option>
 
+                            }
                         }
-                    }
-                </select>
+                    </select>
+                </div>
+
             </div>
             <div class="row">
                 <div class="input-field col s12">

@@ -160,7 +160,7 @@ namespace GuiaPalestra.Controllers
         public struct Datas
         {
             [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+            [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
             public DateTime data { get; set; }
         }
 

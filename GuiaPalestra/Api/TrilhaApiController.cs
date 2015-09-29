@@ -17,9 +17,18 @@ namespace GuiaPalestra.Api
     
     public class TrilhaApiController : ApiController
     {
-        public string Get()
+        public IEnumerable<Trilha> Get()
         {
-            return "Lista de trilhas";
+            var trilhas = new List<Trilha>();
+            var trilha1 = new Trilha(){CoordenadorId = "1",EventoId = "1",ID = "1",NomeTrilha = "OO"};
+            var trilha2 = new Trilha() { CoordenadorId = "2", EventoId = "2", ID = "2", NomeTrilha = "PE" };
+            var trilha3 = new Trilha() { CoordenadorId = "3", EventoId = "3", ID = "3", NomeTrilha = "BD" };
+            trilhas.Add(trilha1);
+            trilhas.Add(trilha2);
+            trilhas.Add(trilha3);
+
+            return trilhas;
+
         }
 
         public HttpResponseMessage Post(Trilha trilha)

@@ -101,7 +101,16 @@ namespace GuiaPalestra.Controllers
 
         public ActionResult ConfirmarPalestra(string eventoId, string palestraId, string coordenadorId, string resposta, string trilhaId)
         {
-            Construtor.EventoApp().ConfirmarParticipacao(palestraId, eventoId, resposta, coordenadorId, trilhaId, _usuario.ID);
+          var retorno =  Construtor.EventoApp().ConfirmarParticipacao(palestraId, eventoId, resposta, coordenadorId, trilhaId, _usuario.ID);
+            if (retorno==false)
+            {
+               this.Flash("Voce ja esta registrado em outro evento nesse mesmo periodo de dias",LoggerEnum.Error); 
+            }
+            else
+            {
+                this.Flash("Confirmacao concluida"); 
+                
+            }
             return RedirectToAction("PalestrasSubmetidas/" + _eventoId);
         }
         public class Horarios

@@ -1,10 +1,6 @@
 ﻿@model GuiaPalestra.Models.Palestrante
 
-@{
-    ViewBag.Title = "Cadastrar";
-}
-
-<h2>Cadastrar</h2>
+<h2 class="headers">Cadastrar Palestrante</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +8,6 @@
    
 
     <div class="form-horizontal">
-        <h4>Palestrante</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -47,13 +42,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
