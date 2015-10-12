@@ -141,8 +141,7 @@ namespace GuiaPalestra.Controllers
                 var diaInicial = evento.DiaInicial;
                 var diaaFinal = evento.DiaFinal;
                 var ListaDatas = new List<Datas>();
-                if (diaInicial.Month == diaaFinal.Month)
-                {
+               
                     for (int i = diaInicial.Day; i <= diaaFinal.Day; i++)
                     {
                         var tempData = new Datas
@@ -151,7 +150,7 @@ namespace GuiaPalestra.Controllers
                         };
                         ListaDatas.Add(tempData);
                     }
-                }
+                
                 return ListaDatas;
             }
             return new List<Datas>();
